@@ -4,10 +4,11 @@
       <div class="row">
         <div class="col header">
           <div>
-            <span class="header__heading">Add Building</span>
+            <span class="header__heading" style="font-weight: bold; margin-left: 2px;">Add Building </span>
           </div>
           <div>
-            <button type="submit" class="btn btn__primary">Submit</button>
+            <button type="submit" class="btn btn-success" style="width: 100px;"> <i class="fa fa-bookmark"
+                aria-hidden="true"></i>Save </button>
           </div>
         </div>
       </div>
@@ -21,27 +22,18 @@
           <div class="row md-0 px-3 pb-2">
             <div class="col-md-4">
               <label class="mb-0">Country</label>
-              <select
-                class="form-control form-control-sm col-md-12"
-                formControlName="countryId"
-                (change)="onCountryChange($event.target.value)"
-              >
+              <select class="form-control form-control-sm col-md-12" formControlName="countryId"
+                (change)="onCountryChange($event.target.value)">
                 <option [ngValue]="null">Choose Country</option>
-                <option
-                  *ngFor="let country of CountryList"
-                  [value]="country.id"
-                >
+                <option *ngFor="let country of CountryList" [value]="country.id">
                   {{ country.name }}
                 </option>
               </select>
             </div>
             <div class="col-md-4">
               <label class="mb-0">State</label>
-              <select
-                class="form-control form-control-sm col-md-12"
-                formControlName="stateId"
-                (change)="onStateChange($event.target.value)"
-              >
+              <select class="form-control form-control-sm col-md-12" formControlName="stateId"
+                (change)="onStateChange($event.target.value)">
                 <option [ngValue]="null">Choose State</option>
                 <option *ngFor="let state of StateList" [value]="state.id">
                   {{ state.name }}
@@ -50,10 +42,7 @@
             </div>
             <div class="col-md-4">
               <label class="mb-0">City</label>
-              <select
-                class="form-control form-control-sm col-md-12"
-                formControlName="cityId"
-              >
+              <select class="form-control form-control-sm col-md-12" formControlName="cityId">
                 <option [ngValue]="null">Choose City</option>
                 <option *ngFor="let city of CityList" [value]="city.id">
                   {{ city.name }}
@@ -66,24 +55,14 @@
           <div class="row md-0 px-3 pb-2">
             <div class="col-md-4">
               <label class="mb-0" for="name">Name</label>
-              <input
-                type="text"
-                formControlName="name"
-                class="form-control col-md-12"
-              />
+              <input type="text" formControlName="name" class="form-control col-md-12" />
             </div>
             <div class="col-md-4">
               <label class="mb-0">Client</label>
-              <select
-                class="form-control form-control-sm col-md-12"
-                formControlName="clientId"
-                (change)="onClientChange($event.target.value)"
-              >
+              <select class="form-control form-control-sm col-md-12" formControlName="clientId"
+                (change)="onClientChange($event.target.value)">
                 <option [ngValue]="null">Choose Client</option>
-                <option
-                  *ngFor="let client of ClientList"
-                  [value]="client.id"
-                >
+                <option *ngFor="let client of ClientList" [value]="client.id">
                   {{ client.name }}
                 </option>
               </select>

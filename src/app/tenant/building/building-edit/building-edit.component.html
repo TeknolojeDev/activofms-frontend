@@ -1,19 +1,16 @@
-<form
-  [formGroup]="AddBuildingDataForm"
-  (ngSubmit)="onAddBuildingDataFormSubmit()"
->
+<form [formGroup]="AddBuildingDataForm" (ngSubmit)="onAddBuildingDataFormSubmit()">
   <section class="content-header pt-0 pb-0 mt-0 mx-0 mb-0 md-0">
     <div class="container-fluid mx-0 px-0 mx-0 mb-0">
       <div class="row">
         <div class="col header">
           <div>
             <span class="header__heading">Edit Building</span>
-            <span class="header__back" routerLink="/app/buildings"
-              ><i class="fas fa-arrow-circle-left"></i> Back to list</span
-            >
+            <span class="header__back" routerLink="/app/buildings"><i class="fas fa-arrow-circle-left"></i> Back to
+              list</span>
           </div>
           <div>
-            <button type="submit" class="btn btn__primary" *ngIf="ShowSaveButton">Save</button>
+            <button type="submit" class="btn btn-success" style="width:100px ;" *ngIf="ShowSaveButton"> <i
+                class="fa fa-arrow-circle-right" aria-hidden="true"></i> Update </button>
           </div>
         </div>
       </div>
@@ -27,27 +24,18 @@
           <div class="row md-0 px-3 pb-2">
             <div class="col-md-4">
               <label class="mb-0">Country</label>
-              <select
-                class="form-control col-md-12"
-                formControlName="countryId"
-                (change)="onCountryChange($event.target.value)"
-              >
+              <select class="form-control col-md-12" formControlName="countryId"
+                (change)="onCountryChange($event.target.value)">
                 <option [ngValue]="null">Choose country</option>
-                <option
-                  *ngFor="let country of CountryList"
-                  [value]="country.id"
-                >
+                <option *ngFor="let country of CountryList" [value]="country.id">
                   {{ country.name }}
                 </option>
               </select>
             </div>
             <div class="col-md-4">
               <label class="mb-0">State</label>
-              <select
-                class="form-control col-md-12"
-                formControlName="stateId"
-                (change)="onStateChange($event.target.value)"
-              >
+              <select class="form-control col-md-12" formControlName="stateId"
+                (change)="onStateChange($event.target.value)">
                 <option [ngValue]="null">Choose State</option>
                 <option *ngFor="let state of StateList" [value]="state.id">
                   {{ state.name }}
@@ -69,24 +57,14 @@
           <div class="row md-0 px-3 pb-2">
             <div class="col-md-4">
               <label class="mb-0" for="name">Name</label>
-              <input
-                type="text"
-                formControlName="name"
-                class="form-control col-md-12"
-              />
+              <input type="text" formControlName="name" class="form-control col-md-12" />
             </div>
             <div class="col-md-4">
               <label class="mb-0">Client</label>
-              <select
-                class="form-control col-md-12"
-                formControlName="clientId"
-                (change)="onClientChange($event.target.value)"
-              >
+              <select class="form-control col-md-12" formControlName="clientId"
+                (change)="onClientChange($event.target.value)">
                 <option [ngValue]="null">Choose client</option>
-                <option
-                  *ngFor="let client of ClientList"
-                  [value]="client.id"
-                >
+                <option *ngFor="let client of ClientList" [value]="client.id">
                   {{ client.name }}
                 </option>
               </select>
@@ -106,11 +84,11 @@
           <div class="label">Floors</div>
           <div class="state">{{ FloorList?.length || 0 }}</div>
         </div>
-        <div class="state-card-expandable--button">
-          <button class="card-btn" (click)="openModal(AddFloorModel)">
-            add
+        <div class="state-card-expandable--button" style="padding-top: 20px;">
+          <button class="btn btn-primary" (click)="openModal(AddFloorModel)" style="width: 100px;">
+            <i class="fa fa-plus"></i> Add
           </button>
-          <button class="card-btn" [routerLink]="FloorURL">view</button>
+          <button class="btn btn-secondary" [routerLink]="FloorURL"style="width: 100px;"> <i class="fa fa-eye"></i> View </button>
         </div>
       </div>
     </div>
@@ -120,25 +98,25 @@
           <div class="label">Flats</div>
           <div class="state">{{ FlatList?.length || 0 }}</div>
         </div>
-        <div class="state-card-expandable--button">
-          <button class="card-btn" (click)="openModal(AddFlatModel)">
-            add
+        <div class="state-card-expandable--button" style="padding-top: 20px;">
+          <button class="btn btn-primary " (click)="openModal(AddFlatModel)"style="width: 100px;">
+            <i class="fa fa-plus"></i> Add
           </button>
-          <button class="card-btn" [routerLink]="FlatURL">view</button>
+          <button class="btn btn-secondary" [routerLink]="FlatURL" style="width: 100px;"> <i class="fa fa-eye" ></i> View </button>
         </div>
       </div>
     </div>
     <div class="col-md-3">
       <div class="state-card-expandable">
         <div class="state-card-expandable--main">
-          <div class="label">P-Slot</div>
+          <div class="label">Parking-Slot</div>
           <div class="state">{{ ParkingSlotList?.length || 0 }}</div>
         </div>
-        <div class="state-card-expandable--button">
-          <button class="card-btn" (click)="openModal(AddParkingSlotModel)">
-            add
+        <div class="state-card-expandable--button" style="padding-top: 20px;">
+          <button class="btn btn-primary" (click)="openModal(AddParkingSlotModel)" style="width: 100px ; margin-right: 20px;">
+            <i class="fa fa-plus"></i> Add
           </button>
-          <button class="card-btn" [routerLink]="ParkingSlotURL">view</button>
+          <button class="btn btn-secondary" [routerLink]="ParkingSlotURL" style="width: 100px;"> <i class="fa fa-eye"></i> View </button>
         </div>
       </div>
     </div>
@@ -148,37 +126,22 @@
 <ng-template #AddFloorModel>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Add Floor</h4>
-    <button
-      type="button"
-      class="btn-close close pull-right"
-      aria-label="Close"
-      (click)="modalRef?.hide()"
-    >
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
       <span aria-hidden="true" class="visually-hidden">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form
-      [formGroup]="AddFloorDateForm"
-      (ngSubmit)="onAddFloorDataFormSubmit()"
-    >
+    <form [formGroup]="AddFloorDateForm" (ngSubmit)="onAddFloorDataFormSubmit()">
       <div class="container-fluid">
         <!-- Field Row Start -->
         <div class="row">
           <div class="col-sm-12 mb-2">
             <label class="mb-0" for="name">Name</label>
-            <input
-              type="text"
-              formControlName="name"
-              class="form-control col-md-12"
-            />
+            <input type="text" formControlName="name" class="form-control col-md-12" />
           </div>
           <div class="col-md-12 mb-2">
             <label class="mb-0">Floor Type</label>
-            <select
-              class="form-control col-md-12"
-              formControlName="floorTypeId"
-            >
+            <select class="form-control col-md-12" formControlName="floorTypeId">
               <option [ngValue]="null">Choose Floor Type</option>
               <option *ngFor="let ft of FloorTypeList" [value]="ft.id">
                 {{ ft.name }}
@@ -198,12 +161,7 @@
 <ng-template #AddFlatModel>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Add Flat</h4>
-    <button
-      type="button"
-      class="btn-close close pull-right"
-      aria-label="Close"
-      (click)="modalRef?.hide()"
-    >
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
       <span aria-hidden="true" class="visually-hidden">&times;</span>
     </button>
   </div>
@@ -214,20 +172,13 @@
         <div class="row">
           <div class="col-sm-12 mb-2">
             <label class="mb-0" for="name">Name</label>
-            <input
-              type="text"
-              formControlName="name"
-              class="form-control col-md-12"
-            />
+            <input type="text" formControlName="name" class="form-control col-md-12" />
           </div>
           <div class="col-md-12 mb-2">
             <label class="mb-0">Floor</label>
             <select class="form-control col-md-12" formControlName="floorId">
               <option [ngValue]="null">Choose Floor</option>
-              <option
-                *ngFor="let floor of ResidenceFloorList"
-                [value]="floor.id"
-              >
+              <option *ngFor="let floor of ResidenceFloorList" [value]="floor.id">
                 {{ floor.name }}
               </option>
             </select>
@@ -245,30 +196,18 @@
 <ng-template #AddParkingSlotModel>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Add Parking Slot</h4>
-    <button
-      type="button"
-      class="btn-close close pull-right"
-      aria-label="Close"
-      (click)="modalRef?.hide()"
-    >
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
       <span aria-hidden="true" class="visually-hidden">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form
-      [formGroup]="AddParkingSlotDateForm"
-      (ngSubmit)="onAddParkingSlotDataFormSubmit()"
-    >
+    <form [formGroup]="AddParkingSlotDateForm" (ngSubmit)="onAddParkingSlotDataFormSubmit()">
       <div class="container-fluid">
         <!-- Field Row Start -->
         <div class="row">
           <div class="col-sm-12 mb-2">
             <label class="mb-0" for="name">Name</label>
-            <input
-              type="text"
-              formControlName="name"
-              class="form-control col-md-12"
-            />
+            <input type="text" formControlName="name" class="form-control col-md-12" />
           </div>
           <div class="col-md-12 mb-2">
             <label class="mb-0">Floor</label>
@@ -280,7 +219,7 @@
             </select>
           </div>
           <div class="col-sm-12">
-            <button type="submit" class="btn btn__primary">Save</button>
+            <button type="submit" class="btn btn__primary" style="width: 100px;"> Save</button>
           </div>
         </div>
         <!-- Field Row End -->

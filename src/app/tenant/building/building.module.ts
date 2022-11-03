@@ -17,9 +17,21 @@ import { BuildingEditComponent } from "./building-edit/building-edit.component";
 import { FloorListComponent } from "./floor-list/floor-list.component";
 import { FlatListComponent } from "./flat-list/flat-list.component";
 import { ParkingSlotListComponent } from "./parkingSlot-list/parkingSlot-list.component";
+import { ViewParkingSlotComponent } from './view-parking-slot/view-parking-slot.component';
+
+
+
+
+
 
 @NgModule({
-  declarations: [BuildingListComponent, FloorListComponent, FlatListComponent, ParkingSlotListComponent, BuildingComponent, BuildingEditComponent],
+  declarations: [BuildingListComponent,
+     FloorListComponent,
+      FlatListComponent,
+      ParkingSlotListComponent,
+      BuildingComponent, 
+      BuildingEditComponent, 
+    ViewParkingSlotComponent],
   imports: [
     CommonModule,
     FormsModule,

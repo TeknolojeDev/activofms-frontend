@@ -27,6 +27,7 @@ interface gridRowModel {
   name: string;
   building: string;
   floor: string;
+  flatname: string;
 }
 
 @Component({
@@ -44,11 +45,13 @@ export class ParkingSlotListComponent extends RoleAuthorizerUtility implements O
   public showPageSizeSelector = true;
   public showInfo = true;
   public showNavButtons = true;
+  public viewParking: string;
 
   public showEdit: boolean = true;
 
   public FilterForm = new FormGroup({
     floorId: new FormControl(""),
+    id: new FormControl(""),
   });
 
   public AddParkingSlotDateForm = new FormGroup({
@@ -72,6 +75,7 @@ export class ParkingSlotListComponent extends RoleAuthorizerUtility implements O
   public FloorList: FloorModel[] = [];
   public ResidenceFloorList: FloorModel[] = [];
   public ParkingFloorList: FloorModel[] = [];
+  public FlatList1: FlatModel[];
 
   public ParkingSlotList: ParkingSlotModel[] = [];
 
@@ -94,6 +98,11 @@ export class ParkingSlotListComponent extends RoleAuthorizerUtility implements O
     });
 
     this.backToViewBuildingURL = `/app/buildings/edit/${this.BuildingId}`;
+
+
+    this.viewParking = `/app/buildings/${this.BuildingId}/viewParking`;
+
+   
 
     await this.loadBuildings();
     await this.loadQueryParamList();
@@ -137,8 +146,9 @@ export class ParkingSlotListComponent extends RoleAuthorizerUtility implements O
   }
 
   async loadFloors(queryParam?: QueryParamModel[]): Promise<void> {
+    debugger
     this.FloorList = await this._tenantBuilding.GetAllFloor([
-      {
+      { 
         QueryParam: "BuildingId",
         value: this.BuildingId,
         method: ParamMethod.FILTER,
@@ -152,19 +162,29 @@ export class ParkingSlotListComponent extends RoleAuthorizerUtility implements O
     this.ParkingFloorList = this.FloorList.filter(
       (el) => el.floorTypeId == FloorType.PARKING
     );
+
+    this.ParkingSlotList = this.ParkingSlotList.filter(
+      (el)=> el.name 
+    )
   }
 
   async loadParkingSlots(): Promise<void> {
+    debugger
     this.ParkingSlotList = await this._tenantBuilding.GetAllParkingSlot(this.queryParamList);
   }
 
-  private loadGridData(): void {
+  async  loadGridData(): Promise<void> {
+    debugger
     const data = [];
+    this.FlatList1 = await this._tenantBuilding.GetAllFlat()
+
 
     this.ParkingSlotList.forEach((slot) => {
       const name = slot.name;
       const building = this.Building.name;
       const floor = this.FloorList?.find((el) => el.id == slot.floorId);
+      const flatname = this.FlatList1.find((el) => el.parkingSlotId == slot.id)?.name;
+
 
       data.push({
         id: slot.id,
@@ -172,10 +192,12 @@ export class ParkingSlotListComponent extends RoleAuthorizerUtility implements O
         building,
         floor: floor?.name,
         floorId: floor?.id,
+        flatname,
       } as gridRowModel);
     });
 
     this.GridData = data;
+    console.log(this.GridData)
   }
 
   onEditClick(event): void {
@@ -185,6 +207,13 @@ export class ParkingSlotListComponent extends RoleAuthorizerUtility implements O
 
     this.modalRef = this.modalService.show(this.templateRef);
   }
+
+    ViewParkingSlot(){
+    debugger
+    this.router.navigate (['/viewParkingslot']);
+    
+    }
+
 
   async OnFilterFormSubmit(): Promise<void> {
     // TODO 1: Load Service Request
@@ -220,4 +249,23 @@ export class ParkingSlotListComponent extends RoleAuthorizerUtility implements O
     await this.loadParkingSlots();
     await this.loadGridData();
   }
+
+  async onFlorChange(value){
+    debugger
+    const queryParam: QueryParamModel[] = [
+      {
+        QueryParam: "floorId",
+        value,
+        method: ParamMethod.FILTER,
+        filterOperator: FilterOperator.EQUAL,
+      },
+    ];
+    console.log(queryParam);
+    
+
+    this.ParkingSlotList = await this._tenantBuilding.GetAllParkingSlot(queryParam);
+
+  }
+
+
 }

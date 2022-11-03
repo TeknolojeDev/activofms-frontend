@@ -105,6 +105,7 @@ import { ClientEditComponent } from "./tenant/Client/Client-edit/Client-edit.com
 import { UserManagementListComponent } from "./tenant/User-Management/User-Management-list/User-Management-list.component";
 import { UserManagementComponent } from "./tenant/User-Management/User-Management/User-Management.component";
 import { UserManagementEditComponent } from "./tenant/User-Management/User-Management-edit/User-Managemnet-edit.component";
+import { ViewParkingSlotComponent } from "./tenant/building/view-parking-slot/view-parking-slot.component"
 
 //RolesWithPermissionAuthorizerTaskBoardComponent
 //Transfer
@@ -388,6 +389,8 @@ import { UserManagementEditComponent } from "./tenant/User-Management/User-Manag
               { path: "create", component: BuildingComponent },
               { path: "edit/:id", component: BuildingEditComponent },
               { path: "manage", component: BuildingEditComponent },
+             { path: "parkingSlots", component: ParkingSlotListComponent },
+
               {
                 path: ":buildingId/floors",
                 children: [{ path: "", component: FloorListComponent }],
@@ -400,6 +403,11 @@ import { UserManagementEditComponent } from "./tenant/User-Management/User-Manag
                 path: ":buildingId/parkingSlots",
                 children: [{ path: "", component: ParkingSlotListComponent }],
               },
+              {
+                path: ":buildingId/viewParking",
+                children: [{ path: "", component: ViewParkingSlotComponent }],
+              },
+       
             ],
           },
           {

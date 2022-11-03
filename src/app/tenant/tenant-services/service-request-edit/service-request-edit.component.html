@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col header">
         <div>
-          <span class="header__heading">Add a new Service Request</span>
+          <span class="header__heading" style="font-weight: bold;margin-left: 3px;">Add a new Service Request</span>
         </div>
       </div>
     </div>
@@ -18,30 +18,17 @@
           <div class="row md-0 px-3 pb-2">
             <div class="col-md-4">
               <label class="mb-0" for="Title">Title</label>
-              <input
-                type="text"
-                formControlName="Title"
-                class="form-control form-control-sm col-md-12"
-                id="Title"
-              />
+              <input type="text" formControlName="Title" class="form-control form-control-sm col-md-12" id="Title" />
             </div>
             <div class="col-md-4">
               <label class="mb-0" for="ServiceTypeId">Service Type</label>
-              <input
-                type="text"
-                formControlName="ServiceTypeId"
-                class="form-control form-control-sm col-md-12"
-                id="ServiceTypeId"
-              />
+              <input type="text" formControlName="ServiceTypeId" class="form-control form-control-sm col-md-12"
+                id="ServiceTypeId" />
             </div>
             <div class="col-md-4">
               <label class="mb-0" for="PriorityId">Priority</label>
-              <input
-                type="text"
-                formControlName="PriorityId"
-                class="form-control form-control-sm col-md-12"
-                id="PriorityId"
-              />
+              <input type="text" formControlName="PriorityId" class="form-control form-control-sm col-md-12"
+                id="PriorityId" />
             </div>
           </div>
           <!-- Field Row: End -->
@@ -49,32 +36,17 @@
           <div class="row md-0 px-3 pb-2">
             <div class="col-md-4">
               <label class="mb-0" for="BuildingId">Building</label>
-              <input
-                type="text"
-                formControlName="BuildingId"
-                class="form-control form-control-sm col-md-12"
-                id="BuildingId"
-                readonly="true"
-              />
+              <input type="text" formControlName="BuildingId" class="form-control form-control-sm col-md-12"
+                id="BuildingId" readonly="true" />
             </div>
             <div class="col-md-4">
               <label class="mb-0" for="FlatId">Flat</label>
-              <input
-                type="text"
-                formControlName="FlatId"
-                class="form-control form-control-sm col-md-12"
-                id="FlatId"
-                readonly="true"
-              />
+              <input type="text" formControlName="FlatId" class="form-control form-control-sm col-md-12" id="FlatId"
+                readonly="true" />
             </div>
             <div class="col-md-4">
               <label class="mb-0" for="Asset">Asset</label>
-              <input
-                type="text"
-                formControlName="Asset"
-                class="form-control form-control-sm col-md-12"
-                id="Asset"
-              />
+              <input type="text" formControlName="Asset" class="form-control form-control-sm col-md-12" id="Asset" />
             </div>
           </div>
           <!-- Field Row End -->
@@ -82,11 +54,8 @@
           <div class="row md-0 px-3 pb-2">
             <div class="col-md-8">
               <label class="mb-0" for="Description">Description</label>
-              <textarea
-                formControlName="Description"
-                class="form-control form-control-sm col-md-12"
-                id="Description"
-              ></textarea>
+              <textarea formControlName="Description" class="form-control form-control-sm col-md-12"
+                id="Description"></textarea>
             </div>
             <div class="col-md-4">
               <label class="mb-0">Status</label>
@@ -102,34 +71,21 @@
           <!-- Field Row Start -->
           <div *ngIf="ShowMaintainerComments" class="row md-0 px-3 pb-2">
             <div class="col-md-8">
-              <label class="mb-0" for="MaintainerComments"
-                >Maintainer Comments</label
-              >
-              <textarea
-                formControlName="MaintainerComments"
-                class="form-control form-control-sm col-md-12"
-                id="MaintainerComments"
-              ></textarea>
+              <label class="mb-0" for="MaintainerComments">Maintainer Comments</label>
+              <textarea formControlName="MaintainerComments" class="form-control form-control-sm col-md-12"
+                id="MaintainerComments"></textarea>
             </div>
           </div>
           <!-- Field Row End -->
           <!-- Button Row Start -->
-          <div class="row md-0 px-3 pb-2">
-            <button
-              type="button"
-              class="btn-sm btn-success btn float-right mx-1 px-4 mt-2 pt-2 pb-2 mt-3"
-              (click)="OnServiceRequestFormSubmit()"
-              [disabled]="DisableUpdateButtons"
-              *ngIf="ShowUpdateButtons"
-            >
-              Update
+          <div class="row md-0 px-3 pb-2" style="margin-left: 2px;">  
+            <button type="button" class="btn-sm btn-success btn float-right "
+              (click)="OnServiceRequestFormSubmit()" [disabled]="DisableUpdateButtons" *ngIf="ShowUpdateButtons" style="width: 100px;">
+              <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> Update 
             </button>
-            <button
-              type="button"
-              class="btn-sm btn-success btn float-right mx-1 px-4 mt-2 pt-2 pb-2 mt-3"
-              (click)="OnServiceRequestFormBack()"
-            >
-              Back
+            <button type="button" class="btn-sm btn-secondary btn float-right" style="width: 100px; margin-left: 20px;"
+              (click)="OnServiceRequestFormBack()">
+              <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Back
             </button>
           </div>
           <!-- Button Row End -->
@@ -146,14 +102,9 @@
           <!-- Field Row Start -->
           <div class="row md-0 px-3 pb-2">
             <div class="col-md-8">
-              <label class="mb-0" for="reviews"
-                >Maintenance Officer Reviews</label
-              >
-              <textarea
-                formControlName="reviews"
-                class="form-control form-control-sm col-md-12"
-                id="reviews"
-              ></textarea>
+              <label class="mb-0" for="reviews">Maintenance Officer Reviews</label>
+              <textarea formControlName="reviews" class="form-control form-control-sm col-md-12"
+                id="reviews"></textarea>
             </div>
           </div>
           <!-- Field Row End -->

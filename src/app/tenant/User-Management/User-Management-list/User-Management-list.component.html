@@ -4,8 +4,8 @@
     <div class="row">
       <div class="col header">
         <span class="header__heading">User Management</span>
-        <button class="btn btn__primary" routerLink="/app/userManagement/create">
-          Add User
+        <button class="btn btn-primary" style="width: 100px;" routerLink="/app/userManagement/create">
+          <i class="fa fa-plus"></i>  Add User 
         </button>
       </div>
     </div>
@@ -53,12 +53,12 @@
       </div>
       <!-- Field Row: End -->
       <!-- Field Row Start -->
-      <div class="row px-3 py-2">
-        <button class="btn btn__primary" (click)="OnFilterFormSubmit()" style="margin-right: 15px">
-          Search
+      <div class="row px-3 py-2" style="margin-left: 2px;">
+        <button class="btn btn-info"  (click)="OnFilterFormSubmit()" style="margin-right: 15px; width: 100px;">
+          <i class="fa fa-search" aria-hidden="true"></i> Search 
         </button>
-        <button class="btn btn__primary" (click)="resetFilterFormSubmit()">
-          Reset
+        <button class="btn btn-danger" (click)="resetFilterFormSubmit()" style="width: 100px;">
+          <i class="fa fa-hourglass-half" aria-hidden="true"></i> Reset  
         </button>
       </div>
       <!-- Field Row End -->
