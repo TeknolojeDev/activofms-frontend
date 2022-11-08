@@ -1,4 +1,4 @@
-export interface ParkingSlotModel {
+export interface  ParkingSlotModel {
   id: number;
   code: string;
   name: string;

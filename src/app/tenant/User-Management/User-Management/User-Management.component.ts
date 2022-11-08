@@ -28,9 +28,11 @@ import { ToastrService } from "ngx-toastr";
 })
 export class UserManagementComponent implements OnInit {
   public AddNewDataForm = new FormGroup({
-    userName: new FormControl(""),
+    
     fullName: new FormControl(""),
     lastName: new FormControl(""),
+    password: new FormControl(""),
+    confirmPassword: new FormControl(""),
     cityId: new FormControl(""),
     stateId: new FormControl(""),
     buildingId: new FormControl(""),
@@ -38,21 +40,7 @@ export class UserManagementComponent implements OnInit {
     telephone: new FormControl(""),
     mobile: new FormControl(""),
     email: new FormControl(""),
-    website: new FormControl(""),
-    buildingName: new FormControl(""),
-    countryName: new FormControl(""),
-    creationTime: new FormControl(""),
-    creatorUserId: new FormControl(""),
-    date: new FormControl(""),
-    deleterUserId: new FormControl(""),
-    deletionTime: new FormControl(""),
-    description: new FormControl(""),
-    isActive: new FormControl(""),
-    isDeleted: new FormControl(""),
-    isProjectExist: new FormControl(""),
-    lastModificationTime: new FormControl(""),
-    lastModifierUserId: new FormControl(""),
-  });
+       });
 
   // DropDowns
   public CountryList: CountryModel[] = [];
@@ -69,7 +57,7 @@ export class UserManagementComponent implements OnInit {
     public CityService: CityService,
     private _tenantUser: TenantUserManagementService,
     private buildingService: TenantBuildingService,
-    private _toster : ToastrService 
+    private _toster: ToastrService
   ) {
     this.SecUserId = +localStorage.getItem("userId");
   }
@@ -141,56 +129,48 @@ export class UserManagementComponent implements OnInit {
   }
 
   public async OnServiceRequestFormSubmit(): Promise<void> {
-    if (this.AddNewDataForm.invalid)
-    return null;
+    if (this.AddNewDataForm.invalid) return null;
     //return this._toster.error("Error, Form Invalid");
 
     const byDefault = {
-      code: "",
-      name: "",
-      description: "",
-      phoneNumber: "",
-      mobileNumber: "",
-      website: "",
+     
+      userName:"",
+      lastName: "",
+      fullName: "",
       email: "",
-      organizationId: 0,
-      contactPerson: "",
-      personContactNumber: "",
+      password: "",
+      confirmPassword: "",
+      departmentId: null,
+      isActive: true,
+      roleId: 23,
+      userTypeId: null,
+      prefixId: null,
+      countryId: null,
+      cityId: null,
+      stateId: null,
+      buildingId: null,
+      floorId: null,
+      flatId: null,
       address1: "",
       address2: "",
-      countryId: 0,
-      countryName: "",
-      stateId: 0,
-      stateName: "",
-      clientId: 0,
-      clientName: "",
-      cityId: 0,
-      cityName: "",
+      mobile: "",
+      telephone: "",
       postalCode: "",
-      prefixId: 0,
-      position: "",
-      isActive: true,
-      multisite: true,
-      creationTime: null,
-      creatorUserId: 0,
-      lastModificationTime: null,
-      lastModifierUserId: 0,
-      isDeleted: 0,
-      deleterUserId: 0,
-      deletionTime: null,
-      date: null,
-      isProjectExist: true,
-      siteName: "",
-      siteAddress: "",
-      siteCity: "",
-      siteCountry: "",
-      siteCount: 0,
-      overAllEmployees: 0,
-      organizationName: "",
-      organizationCode: "",
+      dateOfBirth: "",
+      registrationNo: "",
+      code: "",
+      photoFile: "",
+      confidentialityFile: "",
+      contractFile: "",
+      firstName: "",
+      organizationId: null,
+      emailForgotPassword: "",
+      createdBy: null,
+      parentUserId: null,
     };
 
     const user = { ...byDefault, ...this.AddNewDataForm.value };
+   
     debugger;
     await this._tenantUser.CreateUser(user);
     this._toster.info("User Inserted!");

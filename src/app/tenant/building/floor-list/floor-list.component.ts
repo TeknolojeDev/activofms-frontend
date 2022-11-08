@@ -91,7 +91,7 @@ export class FloorListComponent
       this.BuildingId = +params["buildingId"];
     });
 
-    this.backToViewBuildingURL = `/app/buildings/edit/${this.BuildingId}`;
+    this.backToViewBuildingURL = `/app/buildings/edit${this.BuildingId}`;
 
     await this.loadBuildings();
     await this.loadQueryParamList();

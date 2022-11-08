@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng add @angular/material",
     "build-serve": "node --max_old_space_size=8048 ./node_modules/@angular/cli/bin/ng serve --port 4250",
-    "start": "node --max_old_space_size=8048 ./node_modules/@angular/cli/bin/ng serve --prod",
+    "start": "node --max_old_space_size=8048 ./node_modules/@angular/cli/bin/ng serve",
     "server": "dotnet run --project ../Ozone.WebApi/Ozone.WebApi/Ozone.WebApi.csproj",
     "mockapi": "json-server --watch db.json",
     "test": "ng test",

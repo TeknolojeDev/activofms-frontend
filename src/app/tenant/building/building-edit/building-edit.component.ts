@@ -236,7 +236,7 @@ export class BuildingEditComponent
   }
 
   onStateChange(value): void {
-    console.log(value);
+    // console.log(value);
     const queryParam: QueryParamModel[] = [
       {
         QueryParam: "stateId",

@@ -24,7 +24,7 @@ export enum SortOperator {
   DECS = "-",
 }
 
-export interface QueryParamModel {
+export interface  QueryParamModel {
   QueryParam?: string;
   value?: string | number | boolean;
   method?: ParamMethod;

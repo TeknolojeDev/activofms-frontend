@@ -363,40 +363,7 @@ export class TenantsRegistrationComponent implements OnInit {
     }
 
   }
-  // onSearch(id) 
-  // {
-  //   this.SecUserService.GetLocationsById(id).subscribe((Response) => { 
 
-  //     this.id = Response.id
-  //     this.code = Response.code
-  //     this.name = Response.name
-  //     this.list = Response.secUserLocation
-  //     if(this.id != null && this.id != undefined)
-  //     {
-  //       this.isAllowed= true;
-  //     }
-  //   })
-  // }
-  // onSubmit(): void {
-
-
-  //   this.item.UserName = this.UserForm.get('UserName').value
-  //   this.item.FullName = this.UserForm.get('FullName').value
-  //   this.item.Email = this.UserForm.get('Email').value
-  //   this.item.RoleId = this.UserForm.get('RoleId').value
-  //   this.item.ConfirmPassword = this.UserForm.get('ConfirmPassword').value
-  //   this.item.UserTypeId=this.UserForm.get('UserTypeId').value
-  //   this.item.DepartmentId = this.UserForm.get('DepartmentId').value
-  //   this.item.Designation = this.UserForm.get('Designation').value
-  //   this.item.IsActive = this.UserForm.get('IsActive').value
-  //   this.item.Password=this.UserForm.get('Password').value
-
-
-  //   this.SecUserService.create(this.item).subscribe((Response)=>{
-  //     this._toster.info(Response.message)
-  //    this.UserForm.reset()
-  //   })
-  // }
 
   get f() { return this.UserForm.controls; }
   onRecordSubmit(): void {
@@ -409,22 +376,7 @@ export class TenantsRegistrationComponent implements OnInit {
       this._toster.error("Some fields are required ");
       return;
     }
-    // if (this.UserForm.get('UserName').value == null || this.UserForm.get('UserName').value == undefined || this.UserForm.get('UserName').value == "") {
-    //   this._toster.error("User Name required", "Alert")
-    //   return
-    //   // MesseageError="Module is Empty";
-    // }
-    // if (this.UserForm.get('Email').value == null || this.UserForm.get('Email').value == undefined || this.UserForm.get('Email').value == "") {
-    //   this._toster.error("Email Address required", "Alert")
-    //   return
-    //   // MesseageError="Module is Empty";
-    // }
-    // if (this.UserForm.get('UserTypeId').value == null || this.UserForm.get('UserTypeId').value == undefined || this.UserForm.get('UserTypeId').value == "") {
-    //   this._toster.error("User Type  required", "Alert")
-    //   return
-    //   // MesseageError="Module is Empty";
-    // }
-
+  
 
     const foData: FormData = new FormData();
 

@@ -25,7 +25,7 @@ export class TenantBuildingService {
   private Flat = `${this.URLTenantBuilding}/flat`;
   private ParkingSlot = `${this.URLTenantBuilding}/parkingSlot`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // ---------------------------------------------------------
   // Building: Start
@@ -113,6 +113,7 @@ export class TenantBuildingService {
     let params: string = QueryParamObjToUrl(queryParams);
 
     const URL: string = `${this.ParkingSlot}${params}`;
+    console.log(URL)
     return this.http.get<ParkingSlotModel[]>(URL).toPromise();
   }
 

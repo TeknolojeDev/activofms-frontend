@@ -183,7 +183,7 @@ export class ClientComponent implements OnInit {
     const client = { ...byDefault, ...this.AddNewDataForm.value };
     debugger;
     await this._tenantClient.CreateClient(client);
-    this._toster.success("Client Inserted!");
+    this._toster.info("Client Inserted!");
     this.router.navigate([`/app/client`]);
   }
 }
