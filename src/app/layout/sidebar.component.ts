@@ -2,7 +2,8 @@ import {
   Component,
   ChangeDetectionStrategy,
   Renderer2,
-  OnInit
+  OnInit,
+  ChangeDetectorRef
 } from '@angular/core';
 import { LayoutStoreService } from '@shared/layout/layout-store.service';
 
@@ -17,15 +18,20 @@ export class SidebarComponent implements OnInit {
 
   constructor(
     private renderer: Renderer2,
-    private _layoutStore: LayoutStoreService
-  ) {}
+    private _layoutStore: LayoutStoreService,
+    private ref: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
     this._layoutStore.sidebarExpanded.subscribe((value) => {
       this.sidebarExpanded = value;
       this.toggleSidebar();
+      this.ref.detectChanges()
+      // console.log(this.sidebarExpanded)
     });
   }
+
+
 
   toggleSidebar(): void {
     if (this.sidebarExpanded) {
@@ -33,6 +39,8 @@ export class SidebarComponent implements OnInit {
     } else {
       this.showSidebar();
     }
+
+
   }
 
   showSidebar(): void {

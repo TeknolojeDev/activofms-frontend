@@ -1,4 +1,5 @@
 <form [formGroup]="AddBuildingDataForm" (ngSubmit)="onAddBuildingDataFormSubmit()">
+
   <section class="content-header pt-0 pb-0 mt-0 mx-0 mb-0 md-0">
     <div class="container-fluid mx-0 px-0 mx-0 mb-0">
       <div class="row">
@@ -16,6 +17,7 @@
       </div>
     </div>
   </section>
+
   <section class="content-header pt-0 pb-0 mt-3 mx-0 mb-0 md-0">
     <div class="container-fluid">
       <div class="card">
@@ -75,51 +77,61 @@
       </div>
     </div>
   </section>
+
 </form>
+
+
 <div class="container-fluid">
   <div class="row mx-1">
-    <div class="col-md-3">
+
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
       <div class="state-card-expandable">
         <div class="state-card-expandable--main">
-          <div class="label">Floors</div>
+          <div class="label" style="font-weight: bold;font-size: 15px;">Floors</div>
           <div class="state">{{ FloorList?.length || 0 }}</div>
         </div>
-        <div class="state-card-expandable--button" style="padding-top: 20px;">
-          <button class="btn btn-primary" (click)="openModal(AddFloorModel)" style="width: 100px;">
+        <div class="state-card-expandable--button " style="padding-top: 20px;height: 114px;">
+          <button class="btn btn-primary" (click)="openModal(AddFloorModel)" style="width: 85px;">
             <i class="fa fa-plus"></i> Add
           </button>
-          <button class="btn btn-secondary" [routerLink]="FloorURL"style="width: 100px;"> <i class="fa fa-eye"></i> View </button>
+          <button class="btn btn-secondary" [routerLink]="FloorURL" style="width: 85px;"> <i class="fa fa-eye"></i>
+            View </button>
         </div>
       </div>
     </div>
-    <div class="col-md-3">
+
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
       <div class="state-card-expandable">
         <div class="state-card-expandable--main">
-          <div class="label">Flats</div>
+          <div class="label" style="font-weight: bold; font-size: 15px;">Flats</div>
           <div class="state">{{ FlatList?.length || 0 }}</div>
         </div>
-        <div class="state-card-expandable--button" style="padding-top: 20px;">
-          <button class="btn btn-primary " (click)="openModal(AddFlatModel)"style="width: 100px;">
+        <div class="state-card-expandable--button " style="padding-top: 20px;height: 114px;">
+          <button class="btn btn-primary " (click)="openModal(AddFlatModel)" style="width: 85px;">
             <i class="fa fa-plus"></i> Add
           </button>
-          <button class="btn btn-secondary" [routerLink]="FlatURL" style="width: 100px;"> <i class="fa fa-eye" ></i> View </button>
+          <button class="btn btn-secondary" [routerLink]="FlatURL" style="width: 85px;"> <i class="fa fa-eye"></i> View
+          </button>
         </div>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="state-card-expandable">
+      
+    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+      <div class="state-card-expandable ">
         <div class="state-card-expandable--main">
-          <div class="label">Parking-Slot</div>
+          <div class="label" style="font-weight: bold; font-size: 15px;">Parking-Slot</div>
           <div class="state">{{ ParkingSlotList?.length || 0 }}</div>
         </div>
-        <div class="state-card-expandable--button" style="padding-top: 20px;">
-          <button class="btn btn-primary" (click)="openModal(AddParkingSlotModel)" style="width: 100px ; margin-right: 20px;">
+          <div class="state-card-expandable--button " style="padding-top: 20px;height: 114px;">
+          <button class="btn btn-primary" (click)="openModal(AddParkingSlotModel)" style="width: 85px ; ">
             <i class="fa fa-plus"></i> Add
           </button>
-          <button class="btn btn-secondary" [routerLink]="ParkingSlotURL" style="width: 100px;"> <i class="fa fa-eye"></i> View </button>
+          <button class="btn btn-secondary" [routerLink]="ParkingSlotURL" style="width: 85px;"> <i
+              class="fa fa-eye"></i> View </button>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 

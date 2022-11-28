@@ -138,57 +138,6 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                 // ),
 
             ]),
-            //       new MenuItem(this.l('Operations'), '', 'fas fa-book', this.permissionCheckParent(['Agency','AllProjects']), [
-
-
-
-            //         new MenuItem(
-            //             'Agency',
-            //             '/app/pages/security-module/agency-task-board',
-            //             'fas fa-user-check',
-            //             this.permissionCheck('Agency')
-            //         ),
-
-            //             new MenuItem(
-            //                 'Client Projects',
-            //                 '/app/pages/sales/all-projects',
-            //                 'fas fa-user-edit',
-            //                 this.permissionCheck('AllProjects')
-            //             ),
-
-
-            //   ]),
-            //Sales
-            //  new MenuItem(this.l('Master Setups'), '', 'fas fa-certificate', this.permissionCheckParent(['Standard','Modules']), [
-
-
-            //     new MenuItem(
-            //         'Standard',
-            //         '/app/pages/certification-setups/certificate',
-            //         'fas fa-arrow-circle-right',
-            //         this.permissionCheck('Standard')
-            //     ),
-            //     new MenuItem(
-            //         'Modules',
-            //         '/app/pages/certification-setups/module',
-            //         'fas fa-arrow-circle-right',
-            //         this.permissionCheck('Modules')
-            //     ),
-
-
-            //  ]),
-
-
-
-
-
-
-
-
-
-
-            //Security Group
-
 
             // new MenuItem(this.l('Master Setups'), '', 'fas fa-certificate', this.permissionCheckParent(['Standard', 'Modules', 'DocumentType', 'StandardType', 'ApplicationType', 'AudditorType', 'Country', 'State', 'City', 'CertificationBody', 'EaCode', 'NaceCode', 'CourseType', 'Section', 'Legislation', 'Accreditation', 'ProjectAmount']), [
             new MenuItem(this.l('Master Setups'), '', 'fas fa-certificate', this.permissionCheckParent(['Master Setups-no']), [
@@ -354,12 +303,30 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                 // ),
 
             ]),
+
+            
             new MenuItem(this.l('Dashboard'), '/app/home', 'fas fa-home', this.permissionCheck('dashboard')),
+
+
             new MenuItem(this.l('Buildings'), '/app/buildings', 'fas fa-building', this.permissionCheckParent(['Building'])),
+
+
             new MenuItem(this.l('Clients'), '/app/clients', 'fas fa-users', this.permissionCheckParent(['Client'])),
-            new MenuItem(this.l('User Management'), '/app/userManagement', 'fas fa-users', this.permissionCheckParent(['UserManagement'])),
-             new MenuItem(this.l('Manage Building'), '/app/buildings/manage', 'fas fa-building', this.permissionCheckParent(['BuildingManage'])),
+
+            new MenuItem(this.l('User Management'),
+             '/app/userManagement',
+              'fas fa-users',
+              this.permissionCheckParent(['UserManagement'])),
+
+            new MenuItem(this.l('Manage Building'), 
+            '/app/buildings/manage',
+             'fas fa-building', 
+             this.permissionCheckParent(['BuildingManage'])),
+
             new MenuItem(this.l('Service Requests'), '/app/services/service-request-list', 'fas fa-envelope', this.permissionCheckParent(['ServiceRequestList'])),
+           
+           
+           
             new MenuItem(this.l('Utility'), '', 'fas fa-cogs', this.permissionCheckParent(['Utility']), [
                 new MenuItem(
                     'Service Type',
@@ -432,6 +399,7 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
     }
 
     deactivateMenuItems(items: MenuItem[]): void {
+        debugger
         items.forEach((item: MenuItem) => {
             item.isActive = false;
             item.isCollapsed = true;
@@ -457,6 +425,7 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
     }
 
     activateMenuItem(item: MenuItem): void {
+        debugger
         item.isActive = true;
         if (item.children) {
             item.isCollapsed = false;

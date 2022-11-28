@@ -314,9 +314,7 @@ export class ViewParkingSlotComponent implements OnInit {
     await this._tenantBuilding.UpdateParkingSlot(this.currentParkingSlotId, { "isAllotted": true });
     debugger
 
-    await this._tenantBuilding.UpdateFlats(flatID, {
-      "ParkingSlotId": this.currentParkingSlotId,
-    });
+    await this._tenantBuilding.UpdateFlats(flatID, {"ParkingSlotId": this.currentParkingSlotId,});
     debugger
 
     this._toster.info("Parking Updated");

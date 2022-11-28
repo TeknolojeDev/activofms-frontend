@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
 import { LayoutStoreService } from '@shared/layout/layout-store.service';
 
 @Component({
@@ -12,22 +12,19 @@ export class HeaderLeftNavbarComponent implements OnInit {
   opened: boolean;
   organizationName: any;
   userName: any;
-  constructor(private _layoutStore: LayoutStoreService) {}
+  constructor(private _layoutStore: LayoutStoreService, private ref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    var someStr=localStorage.getItem('organizationName');
-     //console.log(someStr.replace(/['"]+/g, ''));
-    this.organizationName=  someStr.replace(/['"]+/g, '').toUpperCase();
-  
+
     this._layoutStore.sidebarExpanded.subscribe((value) => {
       this.sidebarExpanded = value;
-      this.userName =  "Farooqkhan";
 
-      //organizationName
     });
   }
 
   toggleSidebar(): void {
+    // debugger
     this._layoutStore.setSidebarExpanded(!this.sidebarExpanded);
+    this.ref.detectChanges()
   }
 }

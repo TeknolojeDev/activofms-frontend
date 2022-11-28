@@ -40,7 +40,7 @@
               </select>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
               <label class="mb-0">Slot </label>
 
               <select
@@ -54,7 +54,7 @@
               </select>
             </div>
 
-            <div class="col-md-4" style="float: right; padding-top: 20px">
+            <div class="col-md-5" style="float: right; padding-top: 20px">
               <button
                 class="btn btn-info"
                 (click)="OnFilterFormSubmit()"
@@ -78,7 +78,7 @@
               <div
                 class="btn-group btn-group-toggle"
                 data-toggle="buttons"
-                style="width: 200px"
+                style="width: 215px; padding-top:2px ;"
               >
                 <label class="btn btn-info" [routerLink]="ParkingSlotURL">
                   <input
@@ -120,15 +120,11 @@
   </div>
 
   <div class="row mx-1">
-    <div class="col-md-2 col-sm-6" *ngFor="let content of GridData">
+    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12" *ngFor="let content of GridData">
       <!-- Or ye ngClass k through hum dynamically wo add kr rahy -->
       <div 
-        [ngClass]="{
-          'state-card-expandable': true,
-          remove: content.isAllotted
-        }"
-      >
-        <div class="state-card-expandable--main" style="margin-left: 48px">
+        [ngClass]="{'state-card-expandable': true, remove: content.isAllotted}">
+        <div class="state-card-expandable--main" style="margin:0 auto ;">
           <div *ngIf="content.isAllotted">
             <label for="">{{ content.name }}</label>
             <br />
