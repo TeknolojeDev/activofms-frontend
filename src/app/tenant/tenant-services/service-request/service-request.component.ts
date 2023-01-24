@@ -13,6 +13,7 @@ import { PriorityModel } from "@shared/interface/Priority.interface";
 
 import { SecUserModel } from "@app/Models/user-interface";
 import { ToastrService } from "ngx-toastr";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-service-request",
@@ -57,7 +58,8 @@ export class ServiceRequestComponent implements OnInit {
     public SecUserService: SecUserService,
     private _tenantService: TenantServicesService,
     private _tenantBuilding: TenantBuildingService,
-    private _toster : ToastrService 
+    private _toster : ToastrService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -128,9 +130,8 @@ export class ServiceRequestComponent implements OnInit {
     ServiceRequest.FlatId = this.SecUserFlatObj.id;
 
     await this._tenantService.CreateServiceRequest(ServiceRequest);
-
     this._toster.info("Service Request Created");
-
+    this.router.navigate([`/app/services/service-request-list`]);
     this.ServiceRequestForm.reset();
     this.FillFromFields();
   }

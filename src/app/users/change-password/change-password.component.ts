@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   templateUrl: './change-password.component.html',
-  // styleUrls: ['./change-password.component.css'],
+   styleUrls: ['./change-password.component.css'],
   animations: [appModuleAnimation()]
 })
 export class ChangePasswordComponent extends AppComponentBase {
@@ -20,6 +20,11 @@ export class ChangePasswordComponent extends AppComponentBase {
     NewPassword: new FormControl(''),
 
   })
+  public showPassword: boolean;
+  public showPasswordOnPress: boolean;
+  type: string = 'password';
+  isText: boolean = false; 
+  eyeIcon: string = 'fa-eye-slash';
   public id: number
 
   saving = false;
@@ -47,7 +52,7 @@ export class ChangePasswordComponent extends AppComponentBase {
   ) {
     super(injector);
   }
-
+ 
   UserSubmit(): void {
     
 
@@ -114,8 +119,23 @@ export class ChangePasswordComponent extends AppComponentBase {
   closePopup() {
     this.displayStyle = "none";
   }
-
-
+  passwordGenerate(){
+    const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=?<>,:;{}[]";
+    let paswordLenghth = 8 ;
+    let password = '';
+    for(let i=0;i < paswordLenghth; i++){
+      let randomNumber = Math.floor(Math.random()*chars.length);
+      password +=chars.substring(randomNumber,randomNumber+1);
+    }
+    this.ChangePasswordForm.get("NewPassword").setValue(password);
+    this.ChangePasswordForm.get("NewConfirmPassword").setValue(password);
+  }
+  hideShowPass() {
+    this.isText = !this.isText;
+    this.isText ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
+    this.isText ? (this.type = 'text') : (this.type = 'password');
+  } 
+  
 
 //   UserSubmit(): void {
 //     

@@ -65,7 +65,9 @@ export class BuildingListComponent
   public showPageSizeSelector = true;
   public showInfo = true;
   public showNavButtons = true;
-
+  private SecUserRoleId = parseInt(localStorage.getItem("roleId"));
+  private SecUserClientId = parseInt(localStorage.getItem("clientId"));
+  private SecUserUserId = parseInt(localStorage.getItem("userId"));
   public FilterForm = new FormGroup({
     countryId: new FormControl(""),
     stateId: new FormControl(""),
@@ -100,6 +102,7 @@ export class BuildingListComponent
   }
 
   async ngOnInit(): Promise<void> {
+    debugger;
     await this.loadCountry();
     await this.loadState();
     await this.loadCity();
@@ -138,7 +141,31 @@ export class BuildingListComponent
 
   loadQueryParamList(): void {
     const temp: QueryParamModel[] = [];
-
+    let roleIDList = "2|22|23|24";
+    if(this.SecUserRoleId == Roles.CLIENT){
+      roleIDList = '24';
+    }
+    temp.push({
+      QueryParam: "roleId",
+      value: roleIDList,
+      method: ParamMethod.FILTER,
+      filterOperator: FilterOperator.EQUAL,
+    });
+    if(this.SecUserRoleId == Roles.CLIENT){
+      temp.push({
+        QueryParam: "clientId",
+        value: this.SecUserClientId,
+        method: ParamMethod.FILTER,
+        filterOperator: FilterOperator.EQUAL,
+      }); 
+      temp.push({
+        QueryParam: "userId",
+        value: this.SecUserUserId,
+        method: ParamMethod.FILTER,
+        filterOperator: FilterOperator.EQUAL,
+      });
+     debugger;
+    }
     const filterOptions = this.FilterForm.value;
 
     for (const QueryParam in filterOptions) {

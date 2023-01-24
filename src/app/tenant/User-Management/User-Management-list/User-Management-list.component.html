@@ -4,7 +4,9 @@
     <div class="row">
       <div class="col header">
         <span class="header__heading">User Management</span>
-        <button class="btn btn__primary" routerLink="/app/userManagement/create">
+        <button class="btn btn__primary" (click)="onChangePage()">
+
+        <!-- </button>routerLink="/app/userManagement/create"> -->
           Add User
         </button>
       </div>
@@ -93,7 +95,7 @@
             <!-- DATA GRID COL BUTTON: END-->
             <!-- DATA GRID PAGINATION: START-->
             <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
-            <dxo-paging [pageSize]="5"> </dxo-paging>
+            <dxo-paging [pageSize]="10"> </dxo-paging>
             <dxo-pager [visible]="true" [allowedPageSizes]="allowedPageSizes" [displayMode]="displayMode"
               [showPageSizeSelector]="showPageSizeSelector" [showInfo]="showInfo"
               [showNavigationButtons]="showNavButtons">

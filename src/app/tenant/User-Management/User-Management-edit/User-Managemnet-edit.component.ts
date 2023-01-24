@@ -35,30 +35,17 @@ export class UserManagementEditComponent
   extends RoleAuthorizerUtility
   implements OnInit {
   public AddUserManagementDataForm = new FormGroup({
-    userName: new FormControl(""),
     fullName: new FormControl(""),
     lastName: new FormControl(""),
+    password: new FormControl(""),
+    confirmPassword: new FormControl(""),
     cityId: new FormControl(""),
     stateId: new FormControl(""),
     buildingId: new FormControl(""),
     countryId: new FormControl(""),
     telephone: new FormControl(""),
-    mobile : new FormControl(""),
+    mobile: new FormControl(""),
     email: new FormControl(""),
-    website: new FormControl(""),
-    buildingName: new FormControl(""),
-    countryName: new FormControl(""),
-    creationTime: new FormControl(""),
-    creatorUserId: new FormControl(""),
-    date: new FormControl(""),
-    deleterUserId: new FormControl(""),
-    deletionTime: new FormControl(""),
-    description: new FormControl(""),
-    isActive: new FormControl(""),
-    isDeleted: new FormControl(""),
-    isProjectExist: new FormControl(""),
-    lastModificationTime: new FormControl(""),
-    lastModifierUserId: new FormControl(""),
   });
 
   

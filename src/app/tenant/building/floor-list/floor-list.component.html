@@ -34,7 +34,7 @@
             <!-- DATA GRID COL: START-->
             <dxi-column
               dataField="name"
-              caption="Name"
+              caption="Floor No."
               cssClass="cell-header"
             ></dxi-column>
             <dxi-column
@@ -44,12 +44,12 @@
             ></dxi-column>
             <dxi-column
               dataField="building"
-              caption="Building"
+              caption="Building Name"
               cssClass="cell-header"
             ></dxi-column>
             <dxi-column
               dataField="flatNo"
-              caption="Flat No"
+              caption="Total Flats."
               cssClass="cell-header"
             ></dxi-column>
             <dxi-column
@@ -70,7 +70,7 @@
             <!-- DATA GRID COL BUTTON: END-->
             <!-- DATA GRID PAGINATION: START-->
             <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
-            <dxo-paging [pageSize]="5"> </dxo-paging>
+            <dxo-paging [pageSize]="10"> </dxo-paging>
             <dxo-pager
               [visible]="true"
               [allowedPageSizes]="allowedPageSizes"
@@ -90,7 +90,6 @@
 </div>
 
 <!-- Service Request List: End -->
-
 <ng-template #EditFloorModel>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Edit Floor</h4>

@@ -23,6 +23,7 @@ export class TenantBuildingService {
   private Floor = `${this.URLTenantBuilding}/floor`;
   private FloorType = `${this.URLTenantBuilding}/floorType`;
   private Flat = `${this.URLTenantBuilding}/flat`;
+  private FlatUpdate = `${this.URLTenantBuilding}/flatUpdateCase`;
   private ParkingSlot = `${this.URLTenantBuilding}/parkingSlot`;
 
   constructor(private http: HttpClient) {}
@@ -91,6 +92,12 @@ export class TenantBuildingService {
     let params: string = QueryParamObjToUrl(queryParams);
 
     const URL: string = `${this.Flat}${params}`;
+    return this.http.get<FlatModel[]>(URL).toPromise();
+  }
+  GetAllFlatUpdate(queryParams?: QueryParamModel[]): Promise<FlatModel[]> {
+    let params: string = QueryParamObjToUrl(queryParams);
+
+    const URL: string = `${this.FlatUpdate}${params}`;
     return this.http.get<FlatModel[]>(URL).toPromise();
   }
 

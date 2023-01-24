@@ -254,7 +254,7 @@ export class SecUserService {
     //let headers = new HttpHeaders({
     debugger;
     //   'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
-
+console.log(values);
     // });
     // let options = { headers: headers };
     return this.http.post<any>(`${environment.apiUrl}/api/SecUser/CreateUserWithFiles`, values)

@@ -23,6 +23,12 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./Client.component.css"],
 })
 export class ClientComponent implements OnInit {
+  type: string = 'password';
+  isText: boolean = false;
+  eyeIcon: string = 'fa-eye-slash';
+  public showPassword: boolean;
+  public showPasswordOnPress: boolean;
+  submitted = false;
   public AddNewDataForm = new FormGroup({
     name: new FormControl("", [Validators.required]),
     code: new FormControl("", [Validators.required]),
@@ -30,6 +36,8 @@ export class ClientComponent implements OnInit {
     contactPerson: new FormControl(""),
     mobileNumber: new FormControl(""),
     email: new FormControl(""),
+    UserName: new FormControl(""),
+    Password: new FormControl(""),
     website: new FormControl(""),
     address1: new FormControl(""),
     cityId: new FormControl(""),
@@ -108,6 +116,27 @@ export class ClientComponent implements OnInit {
     if (value.length == 3) (event.target as HTMLInputElement).value += "-";
     if (value.length == 7) (event.target as HTMLInputElement).value += "-";
   }
+
+  get f() {
+    return this.AddNewDataForm.controls;
+  }
+
+  hideShowPass() {
+    this.isText = !this.isText;
+    this.isText ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
+    this.isText ? (this.type = 'text') : (this.type = 'password');
+  }
+  passwordGenerate(){
+    const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=?<>,:;{}[]";
+    let paswordLenghth = 8 ;
+    let password = '';
+    for(let i=0;i < paswordLenghth; i++){
+      let randomNumber = Math.floor(Math.random()*chars.length);
+      password +=chars.substring(randomNumber,randomNumber+1);
+    }
+    this.AddNewDataForm.get("Password").setValue(password);
+  }
+
   onCountryChange(value): void {
     const queryParam: QueryParamModel[] = [
       {
@@ -183,7 +212,7 @@ export class ClientComponent implements OnInit {
     const client = { ...byDefault, ...this.AddNewDataForm.value };
     debugger;
     await this._tenantClient.CreateClient(client);
-    this._toster.success("Client Inserted!");
-    this.router.navigate([`/app/client`]);
+    this._toster.info("Client Inserted!");
+    this.router.navigate([`/app/clients`]);
   }
 }

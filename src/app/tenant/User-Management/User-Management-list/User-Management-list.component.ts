@@ -6,7 +6,6 @@ import { CountryService } from "@shared/Services/country-service";
 import { StateService } from "@shared/Services/state-service";
 import { CityService } from "@shared/Services/City-Service";
 
-
 import { TenantUserManagementService } from "@shared/Services/tenant-user-management.service";
 import { BuildingModel } from "@shared/interface/Building.interface";
 import { CountryModel } from "@shared/Dto/country-model";
@@ -19,14 +18,12 @@ import {
   QueryParamModel,
 } from "@shared/interface/QueryParam.interface";
 
-import {
-  RoleAuthorizerUtility,
-
-} from "@shared/utility/role-authorizer.utility";
+import { RoleAuthorizerUtility, Roles } from "@shared/utility/role-authorizer.utility";
 
 import { ClientModel } from "@shared/interface/Client.interface";
 import { SecUserModel } from "@shared/interface/UserManagement.interface";
 import { TenantBuildingService } from "@shared/Services/tenant-building.service";
+import { TenantServicesService } from "@shared/Services/tenant-services.service";
 
 interface filterModel {
   CreatedByDate: string;
@@ -48,6 +45,7 @@ interface gridRowModel {
   phoneNo: string;
   email: string;
   availableSlotNo: number;
+  roleId:number;
 }
 
 @Component({
@@ -57,7 +55,8 @@ interface gridRowModel {
 })
 export class UserManagementListComponent
   extends RoleAuthorizerUtility
-  implements OnInit {
+  implements OnInit
+{
   public readonly allowedPageSizes = [5, 10, 30, 50, 100, "all"];
   public readonly displayModes = [
     { text: "Display Mode 'full'", value: "full" },
@@ -70,7 +69,7 @@ export class UserManagementListComponent
 
   public FilterForm = new FormGroup({
     countryId: new FormControl(""),
-    buildingId : new FormControl(""),
+    buildingId: new FormControl(""),
     stateId: new FormControl(""),
     cityId: new FormControl(""),
   });
@@ -83,17 +82,22 @@ export class UserManagementListComponent
   private queryParamList: QueryParamModel[] = [];
 
   public CountryList: CountryModel[] = [];
-  public buildingList : BuildingModel[]=[];
+  public buildingList: BuildingModel[] = [];
   public StateList: StateModel[] = [];
   public CityList: CityModel[] = [];
 
+  private SecUserId = parseInt(localStorage.getItem("userId"));
+  private SecUserRoleId = parseInt(localStorage.getItem("roleId"));
+  private SecUserData: SecUserModel;
+
+  public BuildingId: number;
 
   public UserList: SecUserModel[] = [];
-
 
   constructor(
     private router: Router,
     public buildingService: TenantBuildingService,
+    private _tenantService: TenantServicesService,
     public CountryService: CountryService,
     public StateService: StateService,
     public CityService: CityService,
@@ -104,10 +108,25 @@ export class UserManagementListComponent
   }
 
   async ngOnInit(): Promise<void> {
+    await this.LoadUserData();
     await this.loadCountry();
     await this.loadQueryParamList();
     await this.loadUsers();
     await this.loadGridData();
+  }
+
+  private async LoadUserData(): Promise<void> {
+    if (this.SecUserId == null) return; //! Exit If UserId is null
+
+    // TODO 1: Load SecUser Data From DB
+    this.SecUserData = await this._tenantService.GetUserByIdUsingPromise(
+      this.SecUserId
+    );
+
+    const { buildingId } = this.SecUserData;
+    if (buildingId) {
+      this.BuildingId = buildingId;
+    };
   }
 
   async loadCountry(): Promise<void> {
@@ -120,7 +139,6 @@ export class UserManagementListComponent
     this.buildingList = await this.buildingService.GetAllBuildings();
   }
 
-
   async loadState(queryParam?: QueryParamModel[]): Promise<void> {
     this.StateList = await this.StateService.GetAllStates(queryParam);
   }
@@ -132,12 +150,33 @@ export class UserManagementListComponent
   loadQueryParamList(): void {
     const temp: QueryParamModel[] = [];
 
+    let roleIDList = "2|22|23";
+
+    if(this.SecUserRoleId == Roles.MAINTAINER_OFFICER){
+      roleIDList = '22';
+    }
+
     temp.push({
-      QueryParam: 'roleId',
-      value: "2|22|23",
+      QueryParam: "roleId",
+      value: roleIDList,
       method: ParamMethod.FILTER,
       filterOperator: FilterOperator.EQUAL,
-    })
+    });
+    
+    if(this.SecUserRoleId == Roles.MAINTAINER_OFFICER){
+      temp.push({
+        QueryParam: "countryId",
+        value: '6',
+        method: ParamMethod.FILTER,
+        filterOperator: FilterOperator.EQUAL,
+      });
+      temp.push({
+        QueryParam: "buildingId",
+        value: this.BuildingId,
+        method: ParamMethod.FILTER,
+        filterOperator: FilterOperator.EQUAL,
+      });
+    }
 
     const filterOptions = this.FilterForm.value;
     debugger;
@@ -168,7 +207,6 @@ export class UserManagementListComponent
     const data = [];
 
     this.UserList.forEach((userManagement) => {
-
       const name = userManagement.fullName;
       const country = userManagement.countryName;
       const state = userManagement.stateName;
@@ -176,9 +214,6 @@ export class UserManagementListComponent
       const building = userManagement.buildingName;
       const phoneNo = userManagement.telephone;
       const email = userManagement.email;
-
-
-
 
       data.push({
         id: userManagement.id,
@@ -189,6 +224,7 @@ export class UserManagementListComponent
         city,
         phoneNo,
         email,
+        roleId: userManagement.roleId,
       } as gridRowModel);
     });
 
@@ -197,7 +233,9 @@ export class UserManagementListComponent
 
   onEditClick(event): void {
     const Id: number = event.row.data.id;
-    const URL = `/app/userManagement/edit`;
+    const roleId = event.row.data.roleId;
+
+    const URL = roleId == Roles.MAINTAINER_OFFICER ? `/app/userManagement/edit` : `/app/userManagement/editTenant`;
 
     console.log(URL, Id);
 
@@ -230,7 +268,14 @@ export class UserManagementListComponent
 
     this.loadCity(queryParam);
   }
-
+  onChangePage(){
+    if(this.SecUserRoleId==Roles.MAINTAINER_OFFICER){
+      this.router.navigate([`/app/userManagement/createTenant`]);
+    }
+    else{
+      this.router.navigate([`/app/userManagement/create`]);
+    }
+  }
   async OnFilterFormSubmit(): Promise<void> {
     // TODO 1: Load Service Request
     await this.loadQueryParamList();

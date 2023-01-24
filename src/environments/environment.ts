@@ -9,7 +9,7 @@ export const environment = {
   hmr: false,
   appConfig: "appconfig.json",
 
-  // apiUrl: 'https://localhost:5001',
-  apiUrl: "https://activofms-backend.azurewebsites.net",
+   apiUrl: 'https://localhost:5001',
+  //apiUrl: "https://activofms-backend.azurewebsites.net",
   //  mockApiUrl: 'http://localhost:3000',
 };

@@ -16,17 +16,7 @@
       <abp-validation-summary [control]="userNameOrEmailAddressModel" [controlEl]="userNameOrEmailAddressEl">
       </abp-validation-summary>
     </div>
-    <div class="form-group">
-      <!-- <div class="input-group">
-        <input type="password" class="form-control" name="password" [(ngModel)]="authService.authenticateModel.password"
-          [placeholder]="'Password' | localize" required maxlength="32" #passwordModel="ngModel" #passwordEl />
-        <div class="input-group-append">
-          <div class="input-group-text">
-            <span class="fas fa-lock"></span>
-          </div>
-        </div>
-      </div>
-      <abp-validation-summary [control]="passwordModel" [controlEl]="passwordEl"></abp-validation-summary> -->
+    <!-- <div class="form-group">
       <div class="input-group">
         <input name="password" [type]="showPassword ? 'text' : 'password'" class="form-control pwd-control"
           id="password-field" [(ngModel)]="authService.authenticateModel.password" [placeholder]="'Password' | localize"
@@ -40,9 +30,25 @@
           </div>
         </div>
       </div>
+    </div> -->
 
+    <div class="form-group">
+      <div class="input-group">
+        <input name="password" [type]="type" class="form-control pwd-control"
+          id="password-field" [(ngModel)]="authService.authenticateModel.password" [placeholder]="'Password' | localize"
+          required maxlength="32" #passwordModel="ngModel" #passwordEl>
 
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <i alt="hide" class="fa {{eyeIcon}}" (click)="hideShowPass()"
+              [class.hide]="!showPassword"></i>
+            
+          </div>
+        </div>
+      </div>
+      <abp-validation-summary [control]="passwordModel" [controlEl]="passwordEl"></abp-validation-summary>
     </div>
+
     <div class="form-group row">
       <div class="col-md-7">
         <small>

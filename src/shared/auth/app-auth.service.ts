@@ -43,7 +43,7 @@ export class AppAuthService {
 
     authenticate(finallyCallback?: () => void): void {
         finallyCallback = finallyCallback || (() => { });
-  
+  debugger;
         this._tokenAuthService
             .authenticate(this.authenticateModel)
             .pipe(
@@ -57,9 +57,9 @@ export class AppAuthService {
             //     this.processAuthenticateResult(result);
             // });
             .subscribe((result: AuthenticateResultModel) => {
-                  
+                  debugger;
                if (result.token != undefined) {
-                      
+                      debugger
                     localStorage.setItem('secRoleForm', JSON.stringify(result.secRoleForm))
                     localStorage.setItem('userId', JSON.stringify(result.userId))
                     localStorage.setItem('userName', JSON.stringify(result.userName))
@@ -82,6 +82,7 @@ export class AppAuthService {
                     this.processAuthenticateResult(result);
                 }
                 else {
+                    debugger;
                     this._toster.error(result.message);
                     // this._toster.warn(result.message)
                 }

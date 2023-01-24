@@ -13,6 +13,9 @@ import { Router } from '@angular/router';
 export class LoginComponent extends AppComponentBase {
   public showPassword: boolean;
   public showPasswordOnPress: boolean;
+  type: string = 'password';
+  isText: boolean = false;
+  eyeIcon: string = 'fa-eye-slash';
   submitting = false;
 
   public credentials = {
@@ -45,7 +48,11 @@ export class LoginComponent extends AppComponentBase {
 
     return true;
   }
-
+  hideShowPass() {
+    this.isText = !this.isText;
+    this.isText ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
+    this.isText ? (this.type = 'text') : (this.type = 'password');
+  }
   login(): void {
 
 

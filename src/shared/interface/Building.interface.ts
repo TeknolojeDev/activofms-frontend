@@ -14,4 +14,8 @@ export interface BuildingModel {
   createdDate: Date | null;
   isActive: boolean | null;
   isDeleted: boolean | null;
+  floorPrefix: string | null;
+  flatPrefix: string | null;
+  parkingPrefix: string | null;
+  floorParkingPrefix: string | null;
 }

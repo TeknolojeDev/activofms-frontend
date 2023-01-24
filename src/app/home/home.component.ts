@@ -43,7 +43,7 @@ import { ToastrService } from "ngx-toastr";
   animations: [appModuleAnimation()],
 })
 export class HomeComponent extends RoleAuthorizerUtility implements OnInit {
-  public readonly allowedPageSizes = [5, 10, 15, "all"];
+  public readonly allowedPageSizes = [5, 8, 10, 15, "all"];
   public readonly displayModes = [
     { text: "Display Mode 'full'", value: "full" },
     { text: "Display Mode 'compact'", value: "compact" },
@@ -214,6 +214,7 @@ export class HomeComponent extends RoleAuthorizerUtility implements OnInit {
         );
       }
       if (Response.message == "3") {
+        this.router.navigate([`/app/update-password`]);
         this._toster.warning("Please reset your password");
       }
     });

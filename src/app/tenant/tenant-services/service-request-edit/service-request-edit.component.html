@@ -68,6 +68,15 @@
               />
             </div>
             <div class="col-md-4">
+              <label class="mb-0">Status</label>
+              <select class="form-control col-md-12" formControlName="StatusId">
+                <option [ngValue]="null" disabled>Choose Status</option>
+                <option *ngFor="let status of StatusList" [value]="status.id">
+                  {{ status.name }}
+                </option>
+              </select>
+            </div>
+            <!-- <div class="col-md-4">
               <label class="mb-0" for="Asset">Asset</label>
               <input
                 type="text"
@@ -75,7 +84,7 @@
                 class="form-control form-control-sm col-md-12"
                 id="Asset"
               />
-            </div>
+            </div> -->
           </div>
           <!-- Field Row End -->
           <!-- Field Row Start -->
@@ -88,15 +97,7 @@
                 id="Description"
               ></textarea>
             </div>
-            <div class="col-md-4">
-              <label class="mb-0">Status</label>
-              <select class="form-control col-md-12" formControlName="StatusId">
-                <option [ngValue]="null" disabled>Choose Status</option>
-                <option *ngFor="let status of StatusList" [value]="status.id">
-                  {{ status.name }}
-                </option>
-              </select>
-            </div>
+           
           </div>
           <!-- Field Row End -->
           <!-- Field Row Start -->

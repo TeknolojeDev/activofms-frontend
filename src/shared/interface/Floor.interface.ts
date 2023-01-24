@@ -1,8 +1,8 @@
 import { FloorType } from "./FloorType.interface";
 
 export interface FloorModel {
-  id: number;
-  code: string;
+  id?: number;
+  code?: string;
   name: string;
   floorTypeId?: FloorType;
   buildingId: number;

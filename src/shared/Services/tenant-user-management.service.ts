@@ -16,8 +16,11 @@ export class TenantUserManagementService {
   constructor(private http: HttpClient) { }
   GetAllUsers(queryParams?: QueryParamModel[]): Promise<SecUserModel[]> {
     let params: string = QueryParamObjToUrl(queryParams);
-
+    
     const URL: string = `${this.userManagement}${params}`;
+
+    console.log({params, URL});
+    
 
     return this.http.get<SecUserModel[]>(URL).toPromise();
   }

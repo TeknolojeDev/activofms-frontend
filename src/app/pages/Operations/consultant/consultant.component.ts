@@ -214,7 +214,7 @@ export class ConsultantComponent implements OnInit {
       this._toster.error("Some fields are required ");
       return;
     }
-    if (this.id > 0 && this.id != null && this.id != undefined && this.id != NaN) {
+    if (this.id > 0 && this.id != null && this.id != undefined ) {
       this.cuncMod.Id = this.id
     }
 

@@ -105,6 +105,8 @@ import { ClientEditComponent } from "./tenant/Client/Client-edit/Client-edit.com
 import { UserManagementListComponent } from "./tenant/User-Management/User-Management-list/User-Management-list.component";
 import { UserManagementComponent } from "./tenant/User-Management/User-Management/User-Management.component";
 import { UserManagementEditComponent } from "./tenant/User-Management/User-Management-edit/User-Managemnet-edit.component";
+import { TenantUserComponent } from "./tenant/User-Management/tenant-user/tenant-user.component";
+import { TenentUserEditComponent } from "./tenant/User-Management/tenent-user-edit/tenent-user-edit.component";
 
 //RolesWithPermissionAuthorizerTaskBoardComponent
 //Transfer
@@ -417,6 +419,8 @@ import { UserManagementEditComponent } from "./tenant/User-Management/User-Manag
               { path: "", component: UserManagementListComponent },
               { path: "create", component: UserManagementComponent },
               { path: "edit/:id", component: UserManagementEditComponent },
+              { path: "createTenant", component: TenantUserComponent },
+              { path: "editTenant/:id", component: TenentUserEditComponent },
 
             ],
           },

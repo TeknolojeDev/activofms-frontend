@@ -27,10 +27,17 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./User-Management.component.css"],
 })
 export class UserManagementComponent implements OnInit {
+  type: string = 'password';
+  isText: boolean = false;
+  eyeIcon: string = 'fa-eye-slash';
+  public showPassword: boolean;
+  public showPasswordOnPress: boolean;
   public AddNewDataForm = new FormGroup({
-    userName: new FormControl(""),
+    
     fullName: new FormControl(""),
     lastName: new FormControl(""),
+    password: new FormControl(""),
+    confirmPassword: new FormControl(""),
     cityId: new FormControl(""),
     stateId: new FormControl(""),
     buildingId: new FormControl(""),
@@ -38,21 +45,7 @@ export class UserManagementComponent implements OnInit {
     telephone: new FormControl(""),
     mobile: new FormControl(""),
     email: new FormControl(""),
-    website: new FormControl(""),
-    buildingName: new FormControl(""),
-    countryName: new FormControl(""),
-    creationTime: new FormControl(""),
-    creatorUserId: new FormControl(""),
-    date: new FormControl(""),
-    deleterUserId: new FormControl(""),
-    deletionTime: new FormControl(""),
-    description: new FormControl(""),
-    isActive: new FormControl(""),
-    isDeleted: new FormControl(""),
-    isProjectExist: new FormControl(""),
-    lastModificationTime: new FormControl(""),
-    lastModifierUserId: new FormControl(""),
-  });
+       });
 
   // DropDowns
   public CountryList: CountryModel[] = [];
@@ -69,7 +62,7 @@ export class UserManagementComponent implements OnInit {
     public CityService: CityService,
     private _tenantUser: TenantUserManagementService,
     private buildingService: TenantBuildingService,
-    private _toster : ToastrService 
+    private _toster: ToastrService
   ) {
     this.SecUserId = +localStorage.getItem("userId");
   }
@@ -87,6 +80,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   async loadCountry(queryParam?: QueryParamModel[]): Promise<void> {
+   
     this.CountryList = await this.CountryService.GetAllCountries(queryParam);
   }
 
@@ -141,59 +135,67 @@ export class UserManagementComponent implements OnInit {
   }
 
   public async OnServiceRequestFormSubmit(): Promise<void> {
-    if (this.AddNewDataForm.invalid)
-    return null;
+    if (this.AddNewDataForm.invalid) return null;
+    this.AddNewDataForm.get("confirmPassword").setValue(this.AddNewDataForm.get("password").value);
     //return this._toster.error("Error, Form Invalid");
+debugger;
+    // const byDefault = {
+     
+    //   userName:"",
+    //   lastName: "",
+    //   fullName: "",
+    //   email: "",
+    //   password: "",
+    //   confirmPassword: "",
+    //   departmentId: null,
+    //   isActive: true,
+    //   roleId: 23,
+    //   userTypeId: null,
+    //   prefixId: null,
+    //   countryId: null,
+    //   cityId: null,
+    //   stateId: null,
+    //   buildingId: null,
+    //   floorId: null,
+    //   flatId: null,
+    //   address1: "",
+    //   address2: "",
+    //   mobile: "",
+    //   telephone: "",
+    //   postalCode: "",
+    //   dateOfBirth: "",
+    //   registrationNo: "",
+    //   code: "",
+    //   photoFile: "",
+    //   confidentialityFile: "",
+    //   contractFile: "",
+    //   firstName: "",
+    //   organizationId: null,
+    //   emailForgotPassword: "",
+    //   createdBy: null,
+    //   parentUserId: null,
+    // };
 
-    const byDefault = {
-      code: "",
-      name: "",
-      description: "",
-      phoneNumber: "",
-      mobileNumber: "",
-      website: "",
-      email: "",
-      organizationId: 0,
-      contactPerson: "",
-      personContactNumber: "",
-      address1: "",
-      address2: "",
-      countryId: 0,
-      countryName: "",
-      stateId: 0,
-      stateName: "",
-      clientId: 0,
-      clientName: "",
-      cityId: 0,
-      cityName: "",
-      postalCode: "",
-      prefixId: 0,
-      position: "",
-      isActive: true,
-      multisite: true,
-      creationTime: null,
-      creatorUserId: 0,
-      lastModificationTime: null,
-      lastModifierUserId: 0,
-      isDeleted: 0,
-      deleterUserId: 0,
-      deletionTime: null,
-      date: null,
-      isProjectExist: true,
-      siteName: "",
-      siteAddress: "",
-      siteCity: "",
-      siteCountry: "",
-      siteCount: 0,
-      overAllEmployees: 0,
-      organizationName: "",
-      organizationCode: "",
-    };
-
-    const user = { ...byDefault, ...this.AddNewDataForm.value };
+    // const user = { ...byDefault, ...this.AddNewDataForm.value };
+    const user = { ...this.AddNewDataForm.value };
     debugger;
     await this._tenantUser.CreateUser(user);
     this._toster.info("User Inserted!");
     this.router.navigate([`/app/userManagement`]);
+  }
+  hideShowPass() {
+    this.isText = !this.isText;
+    this.isText ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
+    this.isText ? (this.type = 'text') : (this.type = 'password');
+  }
+  passwordGenerate(){
+    const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=?<>,:;{}[]";
+    let paswordLenghth = 8 ;
+    let password = '';
+    for(let i=0;i < paswordLenghth; i++){
+      let randomNumber = Math.floor(Math.random()*chars.length);
+      password +=chars.substring(randomNumber,randomNumber+1);
+    }
+    this.AddNewDataForm.get("password").setValue(password);
   }
 }

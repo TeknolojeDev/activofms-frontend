@@ -13,10 +13,12 @@ import { UIModule } from "@app/UI/UI.module";
 import { UserManagementListComponent } from "./User-Management-list/User-Management-list.component";
 import { UserManagementEditComponent } from "./User-Management-edit/User-Managemnet-edit.component";
 import { UserManagementComponent } from "./User-Management/User-Management.component";
+import { TenantUserComponent } from './tenant-user/tenant-user.component';
+import { TenentUserEditComponent } from './tenent-user-edit/tenent-user-edit.component';
 
 
 @NgModule({
-  declarations: [UserManagementComponent, UserManagementListComponent, UserManagementEditComponent],
+  declarations: [UserManagementComponent, UserManagementListComponent, UserManagementEditComponent, TenantUserComponent, TenentUserEditComponent],
   imports: [
     CommonModule,
     FormsModule,

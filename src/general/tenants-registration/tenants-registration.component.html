@@ -83,14 +83,14 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="mb-0" for="indent">Telephone-No</label>
+                                    <label class="mb-0" for="indent">Telephone No.</label>
                                     <input type="text" formControlName="Telephone" (keypress)="KeyPress($event)"
                                         class="form-control form-control-sm col-md-12" maxlength="12"
                                         placeholder="000-000-0000" id="Telephone" />
 
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="mb-0" for="indent">Mobile-No</label>
+                                    <label class="mb-0" for="indent">Mobile No.</label>
                                     <input type="text" formControlName="Mobile"
                                         class="form-control form-control-sm col-md-12" (keypress)="KeyPress($event)"
                                         maxlength="12" placeholder="000-000-0000" id="Mobile" />
@@ -148,7 +148,7 @@
 
                                 <div class="col-md-4">
                                     <label class="mb-0" for="FlatId">
-                                        {{ "Flat" }}
+                                        {{ "Apartment" }}
                                     </label>
                                     <select class="form-control form-control-sm col-md-12 " formControlName="FlatId"
                                         id="FlatId" required
@@ -215,7 +215,7 @@
                                     Details:</a></b>
 
                             <div class="row mt-1 px-2">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
 
                                     <label class="mb-0" for="UserName">Email Address</label>
                                     <input type="text" formControlName="UserName"
@@ -226,21 +226,29 @@
                                         <!-- <div *ngIf="f.UserName.errors.required">Active is required</div> -->
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-7">
 
-                                    <label class="mb-0" for="Password">Password</label>
+                                    <!-- <label class="mb-0" for="Password">Password</label>
                                     <input type="password" formControlName="Password"
                                         class="form-control form-control-sm col-md-12" id="Password"
+                                        placeholder="Password"/> -->
+                                        <label class="mb-0" for="Password">Password</label>
+                                        <div class="input-group">
+                                           
+                                    <input [type]="type" formControlName="Password"
+                                        class="form-control form-control-sm col-md-12" id="Password"
                                         placeholder="Password"/>
-                                </div>
-
-                                <div class="col-md-4">
-
-                                    <label class="mb-0" for="Password">Confirm Password</label>
-                                    <input type="password" class="form-control form-control-sm col-md-12"
-                                        formControlName="ConfirmPassword" id="ConfirmPassword"
-                                        placeholder="Confirm Password">
-                                   
+                                    
+                                            <div class="input-group-append">
+                                              <div class="input-group-text">
+                                                <i alt="hide" class="fa {{eyeIcon}}" (click)="hideShowPass()"
+                                                  [class.hide]="!showPassword" style="cursor: pointer;"></i>
+                                              </div>
+                                              <div class="input-group-text">
+                                                <i class="fa fa-refresh" (click)="passwordGenerate()" style="cursor: pointer;">Generate</i>
+                                              </div>
+                                            </div>
+                                          </div>
                                 </div>
 
 

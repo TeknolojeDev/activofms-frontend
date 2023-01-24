@@ -26,6 +26,10 @@ import { ToastrService } from "ngx-toastr";
 })
 export class BuildingComponent implements OnInit {
   public AddNewDataForm = new FormGroup({
+    FloorPrefix: new FormControl(""),
+    FloorParkingPrefix: new FormControl(""),
+    FlatPrefix: new FormControl(""),
+    ParkingPrefix: new FormControl(""),
     name: new FormControl("", [Validators.required]),
     cityId: new FormControl(""),
     stateId: new FormControl(""),
@@ -130,7 +134,7 @@ export class BuildingComponent implements OnInit {
     const building = { ...this.AddNewDataForm.value, ...byDefault };
 
     await this._tenantBuilding.CreateBuilding(building);
-    this._toster.info("Service Request Created");
-    this.router.navigate([`/app/building`]);
+    this._toster.info("Building has been saved");
+    this.router.navigate([`/app/buildings`]);
   }
 }

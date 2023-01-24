@@ -113,7 +113,7 @@
                   Details:</a></b>
 
                   <div class="row mt-1 px-2">
-                    <div class="col-md-4">
+                    <div class="col-md-5">
 
                         <label class="mb-0" for="email">User Name</label>
                         <input type="text" formControlName="email"
@@ -121,23 +121,30 @@
                             placeholder="Email Address"
                            />
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-7">
 
-                        <label class="mb-0" for="Password">Password</label>
-                        <input type="password" formControlName="Password"
-                            class="form-control form-control-sm col-md-12" id="Password"
-                            placeholder="Password"/>
-                    </div>
-
-                    <div class="col-md-4">
-
-                        <label class="mb-0" for="Password">Confirm Password</label>
-                        <input type="password" class="form-control form-control-sm col-md-12"
-                            formControlName="ConfirmPassword" id="ConfirmPassword"
-                            placeholder="Confirm Password">
-                       
-                    </div>
-
+                      <!-- <label class="mb-0" for="Password">Password</label>
+                      <input type="password" formControlName="Password"
+                          class="form-control form-control-sm col-md-12" id="Password"
+                          placeholder="Password"/> -->
+                          <label class="mb-0" for="password">Password</label>
+                          <div class="input-group">
+                             
+                      <input [type]="type" formControlName="password"
+                          class="form-control form-control-sm col-md-12" id="password"
+                          placeholder="Password"/>
+                      
+                              <div class="input-group-append">
+                                <div class="input-group-text">
+                                  <i alt="hide" class="fa {{eyeIcon}}" (click)="hideShowPass()"
+                                    [class.hide]="!showPassword" style="cursor: pointer;"></i>
+                                </div>
+                                <div class="input-group-text">
+                                  <i class="fa fa-refresh" (click)="passwordGenerate()" style="cursor: pointer;">Generate</i>
+                                </div>
+                              </div>
+                            </div>
+                  </div>
 
                 </div>
          

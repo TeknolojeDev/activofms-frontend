@@ -8,9 +8,8 @@
         <div class="col header">
           <div>
             <span class="header__heading">Edit Building</span>
-            <span class="header__back" routerLink="/app/buildings"
-              ><i class="fas fa-arrow-circle-left"></i> Back to list</span
-            >
+            <!-- <span class="header__back" routerLink="/app/buildings"
+              ><i class="fas fa-arrow-circle-left"></i> Back to list</span> -->
           </div>
           <div>
             <button type="submit" class="btn btn__primary" *ngIf="ShowSaveButton">Save</button>
@@ -66,13 +65,55 @@
           </div>
           <!-- Field Row: End -->
           <!-- Field Row Start -->
+          <div class="row md-0 px-3 pd-2">
+            <div class="col-md-4">
+              <label class="mb-0" for="FloorPrefix">Residence Floor Prefix</label>
+              <input
+                type="text"
+                formControlName="FloorPrefix"
+                class="form-control col-md-12"
+                placeholder="Residence Floor Prefix"
+              />
+            </div>
+            <div class="col-md-4">
+              <label class="mb-0" for="FloorParkingPrefix">Parking Floor Prefix</label>
+              <input
+                type="text"
+                formControlName="FloorParkingPrefix"
+                class="form-control col-md-12"
+                placeholder="Parking Floor Prefix"
+              />
+            </div>
+          <div class="col-md-4">
+              <label class="mb-0" for="FlatPrefix">Apartment Prefix</label>
+              <input
+                type="text"
+                formControlName="FlatPrefix"
+                class="form-control col-md-12"
+                placeholder="Apartment Prefix"
+              />
+            </div>
+        
+          </div>
+          <!-- Field Row: End -->
+          <!-- Field Row Start -->
           <div class="row md-0 px-3 pb-2">
             <div class="col-md-4">
-              <label class="mb-0" for="name">Name</label>
+              <label class="mb-0" for="ParkingPrefix">Parking Slot Prefix</label>
+              <input
+                type="text"
+                formControlName="ParkingPrefix"
+                class="form-control col-md-12"
+                placeholder="Parking Slot Prefix"
+              />
+            </div>
+            <div class="col-md-4">
+              <label class="mb-0" for="name">Building Name</label>
               <input
                 type="text"
                 formControlName="name"
                 class="form-control col-md-12"
+                placeholder="Building Name"
               />
             </div>
             <div class="col-md-4">
@@ -108,23 +149,23 @@
         </div>
         <div class="state-card-expandable--button">
           <button class="card-btn" (click)="openModal(AddFloorModel)">
-            add
+            Add
           </button>
-          <button class="card-btn" [routerLink]="FloorURL">view</button>
+          <button class="card-btn" [routerLink]="FloorURL">View</button>
         </div>
       </div>
     </div>
     <div class="col-md-3">
       <div class="state-card-expandable">
         <div class="state-card-expandable--main">
-          <div class="label">Flats</div>
+          <div class="label">Apartment</div>
           <div class="state">{{ FlatList?.length || 0 }}</div>
         </div>
         <div class="state-card-expandable--button">
           <button class="card-btn" (click)="openModal(AddFlatModel)">
-            add
+            Add
           </button>
-          <button class="card-btn" [routerLink]="FlatURL">view</button>
+          <button class="card-btn" [routerLink]="FlatURL">View</button>
         </div>
       </div>
     </div>
@@ -136,14 +177,15 @@
         </div>
         <div class="state-card-expandable--button">
           <button class="card-btn" (click)="openModal(AddParkingSlotModel)">
-            add
+            Add
           </button>
-          <button class="card-btn" [routerLink]="ParkingSlotURL">view</button>
+          <button class="card-btn" [routerLink]="ParkingSlotURL">View</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 
 <ng-template #AddFloorModel>
   <div class="modal-header">
@@ -160,33 +202,50 @@
   <div class="modal-body">
     <form
       [formGroup]="AddFloorDateForm"
-      (ngSubmit)="onAddFloorDataFormSubmit()"
+      (submit)="onAddFloorDataFormSubmit()"
     >
       <div class="container-fluid">
         <!-- Field Row Start -->
         <div class="row">
-          <div class="col-sm-12 mb-2">
-            <label class="mb-0" for="name">Name</label>
-            <input
-              type="text"
-              formControlName="name"
-              class="form-control col-md-12"
-            />
-          </div>
           <div class="col-md-12 mb-2">
             <label class="mb-0">Floor Type</label>
             <select
               class="form-control col-md-12"
-              formControlName="floorTypeId"
-            >
+              formControlName="floorTypeId" >
+
               <option [ngValue]="null">Choose Floor Type</option>
               <option *ngFor="let ft of FloorTypeList" [value]="ft.id">
                 {{ ft.name }}
               </option>
             </select>
           </div>
+          <!-- <div class="col-sm-12 mb-2">
+            <label class="mb-0" for="name">Name</label>
+            <input
+              type="text"
+              formControlName="name"
+              class="form-control col-md-12"
+            />
+          </div> -->
+          <div class="col-sm-6 mb-2">
+            <label class="mb-0" for="totalFloor">Total No. Floors</label>
+            <input
+              type="text"
+              formControlName="totalFloor"
+              class="form-control col-md-12"
+            />
+          </div>
+          <div class="col-sm-6 mb-2">
+            <label class="mb-0" for="startFloor">Starting No. Floor</label>
+            <input
+              type="text"
+              formControlName="startFloor"
+              class="form-control col-md-12"
+            />
+          </div>
           <div class="col-sm-12">
-            <button type="submit" class="btn btn__primary">Save</button>
+            <input type="submit" value="Save" class="btn btn__primary">
+            <!-- <button " >Save</button> -->
           </div>
         </div>
         <!-- Field Row End -->
@@ -197,7 +256,7 @@
 
 <ng-template #AddFlatModel>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Add Flat</h4>
+    <h4 class="modal-title pull-left">Add Apartment</h4>
     <button
       type="button"
       class="btn-close close pull-right"
@@ -208,18 +267,11 @@
     </button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="AddFLatDateForm" (ngSubmit)="onAddFlatDataFormSubmit()">
+    <form [formGroup]="AddFLatDateForm" (submit)="onAddFlatDataFormSubmit()">
       <div class="container-fluid">
         <!-- Field Row Start -->
         <div class="row">
-          <div class="col-sm-12 mb-2">
-            <label class="mb-0" for="name">Name</label>
-            <input
-              type="text"
-              formControlName="name"
-              class="form-control col-md-12"
-            />
-          </div>
+          
           <div class="col-md-12 mb-2">
             <label class="mb-0">Floor</label>
             <select class="form-control col-md-12" formControlName="floorId">
@@ -231,6 +283,22 @@
                 {{ floor.name }}
               </option>
             </select>
+          </div>
+          <div class="col-sm-6 mb-2">
+            <label class="mb-0" for="totalApartment">Total No. Apartments</label>
+            <input
+              type="text"
+              formControlName="totalApartment"
+              class="form-control col-md-12"
+            />
+          </div>
+          <div class="col-sm-6 mb-2">
+            <label class="mb-0" for="startApartment">Starting No. Apartment</label>
+            <input
+              type="text"
+              formControlName="startApartment"
+              class="form-control col-md-12"
+            />
           </div>
           <div class="col-sm-12">
             <button type="submit" class="btn btn__primary">Save</button>
@@ -257,19 +325,12 @@
   <div class="modal-body">
     <form
       [formGroup]="AddParkingSlotDateForm"
-      (ngSubmit)="onAddParkingSlotDataFormSubmit()"
+      (submit)="onAddParkingSlotDataFormSubmit()"
     >
       <div class="container-fluid">
         <!-- Field Row Start -->
         <div class="row">
-          <div class="col-sm-12 mb-2">
-            <label class="mb-0" for="name">Name</label>
-            <input
-              type="text"
-              formControlName="name"
-              class="form-control col-md-12"
-            />
-          </div>
+          
           <div class="col-md-12 mb-2">
             <label class="mb-0">Floor</label>
             <select class="form-control col-md-12" formControlName="floorId">
@@ -278,6 +339,22 @@
                 {{ floor.name }}
               </option>
             </select>
+          </div>
+          <div class="col-sm-6 mb-2">
+            <label class="mb-0" for="totalSlots">Total No. Slots</label>
+            <input
+              type="text"
+              formControlName="totalSlots"
+              class="form-control col-md-12"
+            />
+          </div>
+          <div class="col-sm-6 mb-2">
+            <label class="mb-0" for="startSlot">Starting No. Slot</label>
+            <input
+              type="text"
+              formControlName="startSlot"
+              class="form-control col-md-12"
+            />
           </div>
           <div class="col-sm-12">
             <button type="submit" class="btn btn__primary">Save</button>

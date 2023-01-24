@@ -45,6 +45,10 @@ export class BuildingEditComponent
   implements OnInit
 {
   public AddBuildingDataForm = new FormGroup({
+    FloorPrefix: new FormControl(""),
+    FloorParkingPrefix: new FormControl(""),
+    FlatPrefix: new FormControl(""),
+    ParkingPrefix: new FormControl(""),
     name: new FormControl(""),
     cityId: new FormControl(""),
     stateId: new FormControl(""),
@@ -53,17 +57,23 @@ export class BuildingEditComponent
   });
 
   public AddFloorDateForm = new FormGroup({
-    name: new FormControl("", [Validators.required]),
+    totalFloor: new FormControl("", [Validators.required]),
+    startFloor: new FormControl("", [Validators.required]),
+    name: new FormControl(""),
     floorTypeId: new FormControl(""),
   });
 
   public AddFLatDateForm = new FormGroup({
-    name: new FormControl("", [Validators.required]),
+    totalApartment : new FormControl("",[Validators.required]),
+    startApartment : new FormControl("",[Validators.required]),
+    name: new FormControl(""),
     floorId: new FormControl(""),
   });
 
   public AddParkingSlotDateForm = new FormGroup({
-    name: new FormControl("", [Validators.required]),
+    totalSlots : new FormControl("",[Validators.required]),
+    startSlot : new FormControl("",[Validators.required]),
+    name: new FormControl(""),
     floorId: new FormControl(""),
   });
 
@@ -92,17 +102,19 @@ export class BuildingEditComponent
   // UserData
   private QueryParam: QueryParamModel[];
 
+
+  
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private CountryService: CountryService,
-    private ClientService : TenantClientService,
+    private ClientService: TenantClientService,
     private StateService: StateService,
     private CityService: CityService,
     private modalService: BsModalService,
     private _tenantBuilding: TenantBuildingService,
     private _tenantService: TenantServicesService,
-    private _toster : ToastrService 
+    private _toster: ToastrService
   ) {
     super();
   }
@@ -117,7 +129,7 @@ export class BuildingEditComponent
         await this._tenantService.GetUserByIdUsingPromise(
           +localStorage.getItem("userId")
         );
-        
+
       this.BuildingId = currentUser.buildingId;
     }
 
@@ -202,10 +214,14 @@ export class BuildingEditComponent
     // values for ServiceRequestForm
     const values = {
       name: this.Building?.name,
+      FloorPrefix: this.Building?.floorPrefix,
+      FloorParkingPrefix: this.Building?.floorParkingPrefix,
+      FlatPrefix: this.Building?.flatPrefix,
+      ParkingPrefix: this.Building?.parkingPrefix,
       cityId: this.Building?.cityId,
       stateId: this.Building?.stateId,
       countryId: this.Building?.countryId,
-      clientId : this.Building?.clientId,
+      clientId: this.Building?.clientId,
     };
     // update form fields;
     this.AddBuildingDataForm.patchValue(values);
@@ -219,8 +235,6 @@ export class BuildingEditComponent
         filterOperator: FilterOperator.EQUAL,
       },
     ];
-
-    
   }
   onCountryChange(value): void {
     const queryParam: QueryParamModel[] = [
@@ -250,9 +264,8 @@ export class BuildingEditComponent
   }
 
   async onAddBuildingDataFormSubmit(): Promise<void> {
-    if (this.AddBuildingDataForm.invalid)
-    return null;
-      //return abp.message.error("Error, Form Invalid");
+    if (this.AddBuildingDataForm.invalid) return null;
+    //return abp.message.error("Error, Form Invalid");
 
     const updateBuilding = { ...this.AddBuildingDataForm.value };
 
@@ -261,41 +274,44 @@ export class BuildingEditComponent
   }
 
   async onAddFloorDataFormSubmit(): Promise<void> {
-    if (this.AddFloorDateForm.invalid)
-    return null;
+    try {
+      if (this.AddFloorDateForm.invalid) throw new Error("Form Invalid");
       //return abp.message.error("Error, Form Invalid");
 
-    const byDefault = {
-      buildingId: this.BuildingId,
-      isActive: true,
-      isDeleted: false,
-    };
+      const floor = {
+        ...this.AddFloorDateForm.value,
+        buildingId: this.BuildingId,
+      };
 
-    const floor = { ...this.AddFloorDateForm.value, ...byDefault };
+      await this._tenantBuilding.CreateFloor(floor);
 
-    await this._tenantBuilding.CreateFloor(floor);
-    this._toster.info("New Floor Added");
+      this._toster.info("New Floor Added");
 
-    this.modalRef.hide();
-    await this.loadFloor(this.QueryParam);
-    this.AddFloorDateForm.reset();
+      this.modalRef.hide();
+      await this.loadFloor(this.QueryParam);
+      this.AddFloorDateForm.reset();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async onAddFlatDataFormSubmit(): Promise<void> {
-    if (this.AddFLatDateForm.invalid)
-    return null;
-      //return abp.message.error("Error, Form Invalid");
-
-    const byDefault = {
+    if (this.AddFLatDateForm.invalid)throw new Error("Form Invalid");
+    //return abp.message.error("Error, Form Invalid");
+    const apartment = {
+      ...this.AddFLatDateForm.value,
       buildingId: this.BuildingId,
-      isActive: true,
-      isDeleted: false,
     };
+    // const byDefault = {
+    //   buildingId: this.BuildingId,
+    //   isActive: true,
+    //   isDeleted: false,
+    // };
 
-    const flat = { ...this.AddFLatDateForm.value, ...byDefault };
+    //const flat = { ...this.AddFLatDateForm.value, ...byDefault };
 
-    await this._tenantBuilding.CreateFlat(flat);
-    this._toster.info("New Flat Added");
+    await this._tenantBuilding.CreateFlat(apartment);
+    this._toster.info("New Apartment Added");
 
     this.modalRef.hide();
     await this.loadFlat(this.QueryParam);
@@ -303,17 +319,15 @@ export class BuildingEditComponent
   }
 
   async onAddParkingSlotDataFormSubmit(): Promise<void> {
-    if (this.AddParkingSlotDateForm.invalid)
-    return null;
-      //return abp.message.error("Error, Form Invalid");
+    if (this.AddParkingSlotDateForm.invalid)throw new Error("Form Invalid");
+    //return abp.message.error("Error, Form Invalid");
 
-    const byDefault = {
+    const parkingSLot = {
+      ...this.AddParkingSlotDateForm.value,
       buildingId: this.BuildingId,
-      isActive: true,
-      isDeleted: false,
     };
 
-    const parkingSLot = { ...this.AddParkingSlotDateForm.value, ...byDefault };
+    //const parkingSLot = { ...this.AddParkingSlotDateForm.value, ...byDefault };
 
     await this._tenantBuilding.CreateParkingSlot(parkingSLot);
     this._toster.info("New Parking Slot Added");

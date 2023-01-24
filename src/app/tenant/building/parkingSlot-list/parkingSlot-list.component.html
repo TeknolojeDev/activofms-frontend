@@ -75,17 +75,17 @@
             <!-- DATA GRID COL: START-->
             <dxi-column
               dataField="name"
-              caption="Name"
+              caption="Parking Slot No."
               cssClass="cell-header"
             ></dxi-column>
             <dxi-column
               dataField="building"
-              caption="Building"
+              caption="Building Name"
               cssClass="cell-header"
             ></dxi-column>
             <dxi-column
               dataField="floor"
-              caption="Floor"
+              caption="Floor No."
               cssClass="cell-header"
             ></dxi-column>
             <!-- DATA GRID COL: START-->
@@ -101,7 +101,7 @@
             <!-- DATA GRID COL BUTTON: END-->
             <!-- DATA GRID PAGINATION: START-->
             <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
-            <dxo-paging [pageSize]="5"> </dxo-paging>
+            <dxo-paging [pageSize]="10"> </dxo-paging>
             <dxo-pager
               [visible]="true"
               [allowedPageSizes]="allowedPageSizes"
@@ -140,7 +140,7 @@
         <!-- Field Row Start -->
         <div class="row">
           <div class="col-sm-12 mb-2">
-            <label class="mb-0" for="name">Name</label>
+            <label class="mb-0" for="name">Parking Slot No.</label>
             <input
               type="text"
               formControlName="name"
@@ -148,7 +148,7 @@
             />
           </div>
           <div class="col-md-12 mb-2">
-            <label class="mb-0">Floor</label>
+            <label class="mb-0">Parking Floor No.</label>
             <select class="form-control col-md-12" formControlName="floorId">
               <option [ngValue]="null">Choose Floor</option>
               <option *ngFor="let floor of ParkingFloorList" [value]="floor.id">

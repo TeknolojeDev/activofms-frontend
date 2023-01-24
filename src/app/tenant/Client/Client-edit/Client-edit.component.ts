@@ -193,7 +193,7 @@ export class ClientEditComponent
     const UpdateClient = { ...this.AddClientDataForm.value };
 
     await this._tenantClient.UpdateClient(this.ClientId, UpdateClient);
-    this._toster.success("Client Updated");
+    this._toster.info("Client Updated");
   }
 
  

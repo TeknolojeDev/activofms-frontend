@@ -2,6 +2,7 @@ export enum Roles {
   ADMIN = 2,
   MAINTAINER_OFFICER = 23,
   TENANT = 22,
+  CLIENT = 24,
 }
 
 export class RoleAuthorizerUtility {
